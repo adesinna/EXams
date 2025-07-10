@@ -1,0 +1,99 @@
+Rollout and Version:
+    When you create a deployment with a container version say v1, a rollout is triggered and a new deployment revision is
+    created, if the tag changes on the container, it triggers another one.
+
+
+To see the status of rollout:
+
+kubectl rollout status deployment/deployment_name
+
+To see history
+
+kubectl rollout history deployment/deployment_name
+
+
+Deployment Strategy:
+    Recreate:
+        This deletes all the pods at once, and create new ones to replace them
+
+    Rolling Update:
+        This deletes it one by one, and replace one by one.
+
+
+
+Edit your deployment
+kubectl edit deployment frontend # if you cant find the deployment
+
+kubectl apply -f deployment.yaml # add the specific image you want
+
+kubectl rollout undo deployment/deployment_name # this will revert to the specific deployment
+
+You can make changes to the definition file
+
+kubectl apply -f deploy.yaml
+
+kubectl rollout status deployment_name # this will get the status of the deployment
+
+kubectl rollout undo deployment/nginx-deployment # this would go to the previous version
+
+kubectl rollout history deployment/nginx-deployment # this would check history of deployment
+
+kubectl rollout undo deployment/nginx-deployment --to-revision=<revision-number> # goes to the specific deployment
+
+
+1. Blue-Green Deployment
+Blue-Green Deployment involves maintaining two separate environments:
+
+Blue (current): The environment currently serving live traffic.
+Green (new): The environment with the new version of the application.
+
+Steps:
+    Deploy the new version of the application to the Green environment.
+    Run tests on the Green environment to verify functionality.
+    Switch traffic from the Blue environment to the Green environment,
+    usually by updating a LoadBalancer or Kubernetes Service resource.
+    If something goes wrong, roll back by directing traffic back to the Blue environment.
+
+Pros:
+Near-zero downtime.
+Instant rollback if the new version fails.
+
+Cons:
+Requires double the resources (both environments must run simultaneously).
+
+
+Kubernetes Implementation:
+Use separate namespaces, deployments, or services for Blue and Green environments.
+Use Kubernetes Service to switch traffic between environments.
+
+
+
+2. Canary Deployment:
+Canary Deployment gradually introduces a new version of an application to
+a small subset of users before rolling it out to the entire user base.
+
+Steps:
+Deploy the new version (Canary) alongside the existing version (Stable).
+Configure the traffic distribution to send a small percentage of requests to the Canary version (e.g., 5%).
+Monitor the Canary version for issues (e.g., errors, latency).
+Gradually increase the traffic to the Canary version until it handles 100% of the load.
+If issues are detected, roll back to the Stable version.
+
+
+Pros:
+Fine-grained control over the rollout process.
+Reduces the impact of potential issues since only a small percentage of users are initially affected.
+
+Cons:
+Rollout is slower compared to Blue-Green.
+Monitoring and traffic routing can be complex.
+
+
+Kubernetes Implementation:
+Use Kubernetes Deployment with strategies like RollingUpdate or custom traffic-splitting tools.
+Combine with tools like Istio, Linkerd, or Kubernetes Ingress for advanced traffic routing.
+
+
+k set image --help # use this instead of using replace, do not use replace
+
+use edit instead and save with wq!

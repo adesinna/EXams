@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-ecr-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-ecr-app
+  template:
+    metadata:
+      labels:
+        app: my-ecr-app
+    spec:
+      serviceAccountName: ecr-access  # Link to the IAM service account
+      containers:
+      - name: app
+        image: <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<repo-name>:<tag>

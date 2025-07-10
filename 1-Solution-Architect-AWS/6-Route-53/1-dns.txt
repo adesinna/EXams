@@ -1,0 +1,35 @@
+DNS (Domain Name System) is a fundamental part of the internet that translates human-readable domain names
+(like `www.example.com`) into machine-readable IP addresses (like `192.0.2.1`). This system allows users to access websites and services by typing simple names instead of remembering complex numerical addresses.
+
+ Key Components of DNS
+1. Domain Names: Hierarchical names used to identify resources on the internet (e.g., `example.com`).
+2. IP Addresses: Numerical labels assigned to devices on a network, needed for communication.
+3. DNS Servers:
+   - Recursive Resolvers: Intermediaries that receive queries from client devices and fetch the corresponding IP addresses.
+   - Root Servers: The first step in translating domain names, directing queries to the appropriate top-level domain (TLD) servers.
+   - TLD Servers: Responsible for the top-level domain (e.g., `.com`, `.org`) and direct queries to authoritative servers.
+   - Authoritative Name Servers: Provide the definitive IP address for a given domain.
+
+How DNS Works
+
+1. A user types a domain name into a browser.
+2. The query is sent to a recursive resolver.
+3. If the resolver doesn't have the answer cached, it contacts a root server.
+4. The root server directs the resolver to the appropriate TLD server.
+5. The TLD server points to the domain's authoritative name server.
+6. The authoritative server returns the corresponding IP address to the resolver.
+7. The resolver passes the IP address back to the user's device, which uses it to connect to the destination server.
+
+ Types of DNS Records
+- A Record: Maps a domain to an IPv4 address.
+- AAAA Record: Maps a domain to an IPv6 address.
+- CNAME Record: Maps a domain to another domain name.
+- MX Record: Specifies mail servers for a domain.
+- TXT Record: Provides additional text information for a domain, often used for verification and security.
+
+ Importance of DNS
+- Simplifies access to websites and services.
+- Provides scalability and redundancy.
+- Supports security protocols like DNSSEC to prevent spoofing.
+
+Let me know if you'd like to dive deeper into specific aspects!

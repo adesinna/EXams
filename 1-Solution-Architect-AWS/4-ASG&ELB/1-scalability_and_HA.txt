@@ -1,0 +1,14 @@
+Vertical Scalability:
+    This is when there an increase in the size of the instance
+
+    Example RDS use this
+
+
+Horizontal Scalability:
+    This is when there is an increase the number of instances
+
+
+High Availability
+    This means running your application in at least 2 data centers,
+    to make sure they are always up, even if one data center goes down,
+    the other one should take over.

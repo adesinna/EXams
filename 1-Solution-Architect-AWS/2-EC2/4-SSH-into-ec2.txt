@@ -1,0 +1,35 @@
+1. SSH with a .pem Key in AWS
+When you launch an EC2 instance, AWS provides the option to download a .pem file (private key). Here’s how to use it:
+
+
+chmod 400 my-key.pem
+This ensures the private key is readable only by the file owner, as required by SSH.
+
+
+
+ssh -i my-key.pem ec2-user@<Public-IP-or-DNS>
+
+Replace my-key.pem with your private key file and <Public-IP-or-DNS> with the actual IP/DNS of your instance.
+
+Default Usernames (Depending on the AMI):
+
+Amazon Linux or RHEL:ec2-user
+Ubuntu: ubuntu
+CentOS: centos
+SUSE: ec2-user
+Debian: admin or root
+
+
+2. SSH with your own keys
+
+ssh-keygen -t rsa -b 4096 -f my-custom-key
+
+cat my-custom-key.pub  # get the public key
+
+Go to EC2 > Key Pairs > Create Key Pair > Import Key Pair > add the public key
+
+ssh -i my-custom-key ec2-user@<Public-IP-or-DNS> # using the private key to authenticate
+
+
+3. EC2 instance connect
+This is a browser based instance connect

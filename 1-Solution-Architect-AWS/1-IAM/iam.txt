@@ -1,0 +1,23 @@
+IAM is Identity and Access Management, it is a global service, you can create
+user and groups.
+
+Groups can only contain users not groups
+
+Users and Group can be assigned permissions via policies, policies are permissions
+that users or group can use.
+
+The least privilege principle is used.
+
+Roles are used by services, these roles gives permission to the services in aws.
+
+IAM security tools
+
+IAM credentials Report(account-level)
+
+    - A report that list all your account's user and the status of their credentials
+
+IAM Access Advisor(user-level)
+
+    - It shows the service granted to a user and when those services were last accessed
+
+    - You can use this policy to restructure a user's permission

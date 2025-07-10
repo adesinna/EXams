@@ -1,0 +1,21 @@
+Service accounts are used by bots to access the cluster, example an application can get the list of pods
+in the cluster.
+
+kubectl create sa name_sa
+
+kubectl get sa
+
+Whenever a service account is created, a token is also created but is created as a secrets token.
+
+This token is used to access the cluster, even if the apps runs in the cluster, then you can mount as a volume in
+the app pods.
+
+For every namespace a default sa exists, when a pod is create the default sa token is always mounted to any pod created
+in the namespace.
+
+You cannot edit a pod with sa you have to delete, you can specific a service account in the pod definition.
+
+In the new k8s you would need to create a token
+
+kubectl create token sa_name
+

@@ -1,0 +1,13 @@
+Suppose we set up Kubernetes nodes and can communicate with each other and no firewalls restriction. Now we have to
+configure networking at the pod layer.
+
+K8s doesnt come with a in built solution for pod networking but there is a layout in CNI
+- Every pod should have an ip
+- Every pod should be able to communicate with each other both on the same node and on the other nodes.
+
+
+/opt/cni/bin  # contains all the cni plugins
+
+
+/etc/cni/net.d/ # contains the cni plugin currently being used
+

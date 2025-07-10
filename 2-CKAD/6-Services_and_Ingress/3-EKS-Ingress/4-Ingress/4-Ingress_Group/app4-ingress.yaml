@@ -1,0 +1,68 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app4-ingress
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: app-ingress-lb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-1:479465295367:certificate/bb680cfc-8bff-4ee4-8a75-adbde85c8dd5
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/group.name: "shanana-group"
+    alb.ingress.kubernetes.io/group.order: '40'  # Priority order
+
+spec:
+  ingressClassName: alb
+  rules:
+    - host: app4.shananatestingdevops.xyz
+      http:
+        paths:
+          - path: /service19
+            pathType: Prefix
+            backend:
+              service:
+                name: service19-svc
+                port:
+                  number: 80
+          - path: /service20
+            pathType: Prefix
+            backend:
+              service:
+                name: service20-svc
+                port:
+                  number: 80
+          - path: /service21
+            pathType: Prefix
+            backend:
+              service:
+                name: service21-svc
+                port:
+                  number: 80
+          - path: /service22
+            pathType: Prefix
+            backend:
+              service:
+                name: service22-svc
+                port:
+                  number: 80
+          - path: /service23
+            pathType: Prefix
+            backend:
+              service:
+                name: service23-svc
+                port:
+                  number: 80
+          - path: /service24
+            pathType: Prefix
+            backend:
+              service:
+                name: service24-svc
+                port:
+                  number: 80

@@ -1,0 +1,5 @@
+AWS cloud front is the content delivery network,this cache or the website content around the world
+this means that there is low latency for your data.
+
+
+POP point of present

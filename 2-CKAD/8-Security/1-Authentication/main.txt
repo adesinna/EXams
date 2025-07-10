@@ -1,0 +1,65 @@
+1. Authentication:
+   Different people will need access to the cluster, like Admins, Developers, and Bots
+
+   You can not create users in a kubernetes cluster, it relies on external source like
+   LDAP, IAM users in aws, and so. But you can create and manage service accounts.
+
+    All user access is managed by the kube-api server
+
+   Authentications Mechanism
+
+   - Static Password
+        this is a csv file that contains
+            password, username, user_id, user_group_id
+
+   - Static Token File
+           this is a csv file that contains
+            token, username, user_id, user_group_id
+
+   - Certificates (using kubeconfig)
+        --key admin.key
+        --cert admin.crt
+        --cacert ca.crt
+
+
+
+2. Kubeconfig:
+   This contains the authentication details of
+   - server
+   - client-key key
+   - client certificate
+   - certificate authority
+
+   This is what the kube-api would use it to authenticate.
+   It is located by default, ~/.kube/config
+   kubectl --kubeconfig=/path/to/custom-kubeconfig get pods
+
+   This config has 3 components
+
+   i. Clusters:
+        This is the different clusters, like dev cluster, staging cluster etc
+           -server
+
+   ii. Users:
+        These are the users with different privileges, that can access the cluster
+           - client-key key
+            - client certificate
+            - certificate authority
+
+
+
+   iii. Contexts:
+           This is the matching of the cluster with the users
+
+          Each user would be matched to a specific cluster
+
+
+
+To view the current file use to access the cluster
+
+kubectl config view
+
+kubectl config view --kubeconfig=/path/to/custom-kubeconfig #
+
+
+kubectl config --help

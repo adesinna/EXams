@@ -1,0 +1,45 @@
+A lifecycle configuration is a set of rules applied to an S3 bucket. Each rule specifies actions such as
+transitioning objects to a different storage class or expiring (deleting) objects after a certain period.
+
+
+Key Features
+Transition Actions:
+
+    Automatically move objects to a lower-cost storage class as they age or become less frequently accessed.
+
+Supported transitions include:
+
+    From S3 Standard to S3 Standard-IA, S3 One Zone-IA, or S3 Intelligent-Tiering.
+    From active storage classes to archival classes like S3 Glacier, S3 Glacier Flexible Retrieval, or S3 Glacier Deep Archive.
+
+Expiration Actions:
+
+    Automatically delete objects after a specified time to save storage costs or comply with data retention policies.
+    Noncurrent Version Actions:
+
+Manage old versions of objects if versioning is enabled by transitioning or expiring noncurrent (previous) versions.
+Multipart Upload Cleanup:
+
+Automatically remove incomplete multipart uploads to save costs.
+Setting Up a Lifecycle Policy
+A lifecycle configuration rule includes the following:
+
+Filter: Defines the subset of objects the rule applies to, based on prefixes or tags.
+Actions: Specifies what happens to the objects (e.g., transition, expiration).
+Time Periods: Defines when the action occurs (e.g., after 30 days).
+Example: A rule can transition objects from S3 Standard to S3 Glacier after 90 days and delete them after 365 days.
+
+Use Cases
+Cost Optimization:
+
+Move infrequently accessed data to lower-cost storage.
+Automatically archive or delete data no longer needed.
+Data Lifecycle Management:
+
+Enforce data retention policies by expiring objects after a set period.
+Regulatory Compliance:
+
+Ensure that non-essential data is deleted after required retention periods.
+Efficiency in Data Handling:
+
+Automate management of large datasets with varying access patterns.

@@ -1,0 +1,67 @@
+What is an ENI?
+An Elastic Network Interface (ENI) is a virtual network interface that you can attach to an instance in a Virtual Private Cloud (VPC) in AWS. It represents a logical network adapter, including attributes like private IP addresses, public IP addresses, and associated security groups.
+
+ENIs provide a way to manage networking for instances and support various use cases like load balancing, fault tolerance, and high availability.
+
+Key Components of an ENI
+Private IP Addresses:
+
+Each ENI must have one primary private IP address.
+Secondary private IP addresses can also be added.
+Public IP Address (Optional):
+
+If enabled, an Elastic IP (EIP) or auto-assigned public IP can be associated with the ENI for internet access.
+MAC Address:
+
+Each ENI has a unique MAC address, which ensures uniqueness at the hardware level.
+Security Groups:
+
+An ENI can be associated with one or more security groups, which control inbound and outbound traffic.
+Elastic Load Balancing:
+
+ENIs can be associated with Elastic Load Balancers for distributed workloads.
+Network ACLs:
+
+Traffic routed through an ENI is subject to Network Access Control List (NACL) rules.
+Attach/Detach:
+
+ENIs can be attached to or detached from instances dynamically, allowing flexibility in resource management.
+Types of ENIs
+Primary ENI:
+
+Created by default when a new instance is launched.
+Cannot be detached from the instance.
+Secondary ENI:
+
+Manually created and attached to an instance.
+Can be detached from one instance and re-attached to another instance in the same AZ.
+Use Cases
+High Availability:
+
+Attach secondary ENIs to a standby instance for quick failover.
+If the primary instance fails, the secondary instance can take over traffic seamlessly.
+Custom Networking:
+
+Assign multiple ENIs with different security groups for instances running applications requiring separate traffic rules (e.g., web server and database server).
+Elastic IP Management:
+
+ENIs allow managing Elastic IPs separately from instances. You can associate an Elastic IP with an ENI and move the ENI between instances.
+Monitoring and Isolation:
+
+Use ENIs to separate traffic for monitoring purposes, such as logging or firewall rules.
+Multiple Subnets or Networks:
+
+Attach ENIs from different subnets to a single instance, enabling multi-network access.
+Advantages of ENIs
+Flexibility:
+
+Attach/detach ENIs as needed, without restarting instances.
+High Availability:
+
+ENIs allow for quick recovery during instance failure.
+Customizable:
+
+Configure each ENI independently (e.g., private IPs, public IPs, security groups).
+Scalability:
+
+Use secondary ENIs for expanding traffic handling capabilities.

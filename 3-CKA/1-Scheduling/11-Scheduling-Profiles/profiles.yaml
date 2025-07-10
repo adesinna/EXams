@@ -1,0 +1,37 @@
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: default-scheduler
+    plugins:
+      queueSort:
+        enabled:
+          - PrioritySort
+      preFilter:
+        enabled:
+          - NodeResourcesFit
+      filter:
+        enabled:
+          - NodeUnschedulable
+          - NodeName
+      score:
+        enabled:
+          - NodeResourcesBalancedAllocation
+          - ImageLocality
+        disabled:
+          - TaintToleration
+  - schedulerName: custom-scheduler
+    plugins:
+      queueSort:
+        enabled:
+          - PrioritySort
+      preFilter:
+        enabled:
+          - NodeAffinity
+      filter:
+        enabled:
+          - PodTopologySpread
+      score:
+        enabled:
+          - NodeResourcesFit
+        disabled:
+          - NodeAffinity

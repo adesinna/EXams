@@ -1,0 +1,34 @@
+There are some workloads that are might run till the cluster is stopped, and there are
+some that needs to be ephemeral.
+
+While replicaset ensure a given set of pods are running,
+jobs make sure this ephemeral pods do their jobs and disappear.
+
+Cron job is for periodic jobs
+
+kubectl get jobs
+
+kubectl get cronjobs
+
+
+* * * * *
+- - - - -
+| | | | |
+| | | | +---- Day of the week (0 - 7) (Sunday=0 or 7)
+| | | +------ Month (1 - 12)
+| | +-------- Day of the month (1 - 31)
+| +---------- Hour (0 - 23)
++------------ Minute (0 - 59)
+
+
+An asterisk (*): Represents "every" value for that field.
+A number: Specifies a specific value (e.g., 5 for "5th minute").
+A range (-): Specifies a range of values (e.g., 1-5 for "1 to 5").
+A comma-separated list (x,y,z): Specifies multiple values (e.g., 1,3,5 for "1st, 3rd, and 5th").
+An interval (*/n): Specifies every n units (e.g., */10 for "every 10 minutes").
+
+
+Run at 11:00 PM on the 1st and 15th of each month:
+
+Copy code
+0 23 1,15 * *

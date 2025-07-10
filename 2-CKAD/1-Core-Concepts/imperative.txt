@@ -1,0 +1,254 @@
+k Kubectl Imperative Commands Cheat Sheet for CKAD
+
+Imperative commands in `kubectl` allow you to create, modify, or delete Kubernetes resources
+quickly without writing YAML manifests. This is especially useful for rapid testing and
+troubleshooting during your CKAD exam.
+
+
+
+Basic Syntax
+
+
+kubectl <action> <resource> <options>
+
+
+- Action: Commands like `create`, `apply`, `get`, `delete`, `edit`.
+- Resource: Kubernetes objects like pods, deployments, services, etc.
+- Options: Flags for specific configurations.
+
+
+
+1. Create Resources Imperatively
+
+Create a Pod
+
+kubectl run <pod-name> --image=<image-name> --restart=Never
+
+- Example:
+
+  kubectl run my-pod --image=nginx --restart=Never
+
+
+# Create a Deployment
+
+kubectl create deployment <deployment-name> --image=<image-name>
+
+- Example:
+
+  kubectl create deployment my-deployment --image=nginx
+
+
+# Create a Service
+- ClusterIP:
+
+  kubectl expose pod <pod-name> --port=<port> --target-port=<container-port>
+
+  Example:
+
+  kubectl expose pod my-pod --port=80 --target-port=8080
+
+
+- NodePort:
+
+  kubectl expose deployment <deployment-name> --type=NodePort --port=<port>
+
+  Example:
+
+  kubectl expose deployment my-deployment --type=NodePort --port=80
+
+
+# Create a ConfigMap
+
+kubectl create configmap <configmap-name> --from-literal=<key>=<value>
+
+- Example:
+
+  kubectl create configmap app-config --from-literal=app=nginx
+
+
+# Create a Secret
+
+kubectl create secret generic <secret-name> --from-literal=<key>=<value>
+
+- Example:
+
+  kubectl create secret generic my-secret --from-literal=username=admin --from-literal=password=pass123
+
+
+
+
+2. Modify Resources Imperatively
+
+# Scale a Deployment
+
+kubectl scale deployment <deployment-name> --replicas=<number>
+
+- Example:
+
+  kubectl scale deployment my-deployment --replicas=3
+
+
+# Update an Image in a Deployment
+
+kubectl set image deployment/<deployment-name> <container-name>=<new-image>
+
+- Example:
+
+  kubectl set image deployment/my-deployment nginx=nginx:1.21
+
+
+# Add a Label
+
+kubectl label <resource-type> <resource-name> <key>=<value>
+
+- Example:
+
+  kubectl label pod my-pod environment=production
+
+
+# Add an Annotation
+
+kubectl annotate <resource-type> <resource-name> <key>=<value>
+
+- Example:
+
+  kubectl annotate pod my-pod description="Test Pod"
+
+
+
+
+3. Debugging and Troubleshooting
+
+# Get Logs from a Pod
+
+kubectl logs <pod-name>
+
+- Example:
+
+  kubectl logs my-pod
+
+
+- For a specific container:
+
+  kubectl logs <pod-name> -c <container-name>
+
+
+# Execute a Command in a Pod
+
+kubectl exec -it <pod-name> -- <command>
+
+- Example:
+
+  kubectl exec -it my-pod -- bash
+
+
+# Port Forward a Pod
+
+kubectl port-forward <pod-name> <local-port>:<pod-port>
+
+- Example:
+
+  kubectl port-forward my-pod 8080:80
+
+
+# Get Resource Details
+
+kubectl describe <resource-type> <resource-name>
+
+- Example:
+
+  kubectl describe pod my-pod
+
+
+
+
+4. Delete Resources
+
+# Delete a Pod
+
+kubectl delete pod <pod-name>
+
+- Example:
+
+  kubectl delete pod my-pod
+
+
+# Delete a Deployment
+
+kubectl delete deployment <deployment-name>
+
+- Example:
+
+  kubectl delete deployment my-deployment
+
+
+# Delete All Resources in a Namespace
+
+kubectl delete all --all -n <namespace>
+
+- Example:
+
+  kubectl delete all --all -n default
+
+
+
+
+5. Resource Templates
+Generate resource YAML files quickly using `--dry-run` and `-o yaml`.
+
+# Generate a Pod YAML
+
+kubectl run <pod-name> --image=<image-name> --restart=Never --dry-run=client -o yaml
+
+- Example:
+
+  kubectl run my-pod --image=nginx --restart=Never --dry-run=client -o yaml
+
+kubectl run my-pod --image=nginx --restart=Never --dry-run=client -o yaml > my-pod.yaml
+
+
+
+# Generate a Deployment YAML
+
+kubectl create deployment <deployment-name> --image=<image-name> --dry-run=client -o yaml
+
+- Example:
+
+  kubectl create deployment my-deployment --image=nginx --dry-run=client -o yaml
+
+
+
+
+
+
+ 6. Useful Shortcuts
+
+- List all pods:
+
+  kubectl get pods
+
+
+- Watch resources in real-time:
+
+  kubectl get pods -w
+
+
+- Apply labels to multiple resources:
+
+  kubectl label pod my-pod1 my-pod2 app=nginx
+
+
+
+
+ Tips for CKAD Exam
+1. Practice Efficiency: Learn to use `kubectl` commands with confidence to save time.
+2. Understand Common Patterns: Focus on deployment, debugging, and resource management commands.
+3. Use `--dry-run`: Create YAML manifests quickly for exam tasks.
+4. Leverage Aliases: Set up useful aliases before the exam (if allowed), such as:
+
+   alias k="kubectl"
+   alias kgp="kubectl get pods"
+   alias kdp="kubectl describe pod"
+
+
+Let me know if you'd like more tailored examples!

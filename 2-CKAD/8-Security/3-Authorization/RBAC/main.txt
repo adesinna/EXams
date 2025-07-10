@@ -1,0 +1,12 @@
+A role is created this role would have some sets of permissions, then a
+rolebinding object would be created to associate users with the role.
+Roles are created in namespace
+
+To know whether you can
+
+kubectl auth can-i --help
+
+
+Cluster role is for cluster all namespaces and wide resources, like nodes, pv and others.
+
+

@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-hostpath
+spec:
+  storageClassName: local-storage # this must be the same for the pvc, it is what the pvc will use to claim
+  capacity:
+    storage: 1Gi  #Mi,Gi,Ti,Pi
+  accessModes:
+    - ReadWriteOnce  #ReadWriteMany, ReadOnlyMany
+  persistentVolumeReclaimPolicy: Delete # delete backend storage when pv is deleted
+  hostPath: # ReadWriteOnce for host path
+    path: "/tmp/data" # this is the backend volume, it will be created immediately the pod is created!
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce # it must tally with the PV access mode
+  resources:
+    requests:
+      storage: 1Gi # the amount of storage it needs from the PV, but it will try to use all since it is one to one.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  volumes:
+    - name: task-pv-storage # must be the same as volume mount
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage # the volume inside the container
+
+# host path deletes the index.html since it was attached to an empty data when the pod was created,
+
+# nfs allows the volume to be available on all nodes
+
+# for deployment below
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: temp-nginx
+  template:
+    metadata:
+      labels:
+        app: temp-nginx
+    spec:
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+      containers:
+      - name: nginx
+        image: nginx:1.14.2 #1.16.1
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: "/usr/share/nginx/html"
+            name: task-pv-storage

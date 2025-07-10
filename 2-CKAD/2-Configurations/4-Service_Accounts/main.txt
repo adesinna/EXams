@@ -1,0 +1,27 @@
+There are two types of accounts that you can use to access the cluster,
+see it as a gmail account
+
+i. User accounts # this is use by humans
+ii. Service accounts # This is used by bots and machine
+
+Service account is what bot uses to authenticate to the k8 cluster.
+Whenever a service account is created, a token is also create as a secret object that is associated with it,
+this is what the external application will use to do the authentication to the k8 cluster.
+
+If the 3rd party application is also in the cluster, i.e running as a pod, the token would mounted as a volume.
+
+
+kubectl get sa
+
+kubectl describe sa name_of_sa
+
+kubectl get seceret sa_token-kbbdm # this is the token it secreted
+
+If the 3rd party application is on the cluster too, you can mount the secret as a volume
+
+
+Every pod in a namespace have a default sa mounted on it so it can run
+
+To add service account in the deployment spec
+
+serviceAccountName: dashboard-sa

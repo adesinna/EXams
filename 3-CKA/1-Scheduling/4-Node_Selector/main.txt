@@ -1,0 +1,4 @@
+You need to first label the node, and define
+the selector in the definition file
+
+kubectl label node node01 size=Large

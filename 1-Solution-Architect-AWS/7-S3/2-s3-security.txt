@@ -1,0 +1,60 @@
+   User-Based:
+     IAM Policies:
+        This is when api calls should be allowed for a specific IAM user
+
+    Resource-Based:
+        Bucket-policies: bucket wide rules from the s3 console- allows cross account
+
+        Object Access Control list: fine grain
+
+        Bucket Access Control list: less common
+
+You can access a bucket if the IAM allows or the resource based policy allows
+
+
+Bucket security in Amazon S3 is critical for controlling access and protecting the data stored in your S3 buckets. Here’s a brief overview of key elements of bucket security:
+
+ 1. Bucket Policies
+- JSON-based policies attached to buckets to define who can access the bucket and
+  what actions they can perform.
+- Supports fine-grained access controls (e.g., read-only for specific users or public
+  read access for specific objects).
+
+ 2. Access Control Lists (ACLs)
+- Used to grant permissions to individual AWS accounts or predefined groups for
+    specific objects or buckets.
+- Typically used for legacy scenarios, with bucket policies preferred for new configurations.
+
+ 3. Identity and Access Management (IAM)
+- IAM roles and policies provide centralized control over user and service permissions
+  for accessing S3 buckets.
+- Ensures least-privilege access based on job requirements.
+
+ 4. Bucket Ownership Controls
+- Controls like bucket owner enforced access help prevent misconfigurations when
+  objects are uploaded by external accounts.
+
+ 5. Encryption
+- At Rest: Use server-side encryption (SSE) with AWS-managed keys (SSE-S3), customer-managed
+   keys in AWS KMS (SSE-KMS), or client-side encryption.
+- In Transit: Protect data using HTTPS for secure transmission.
+
+ 6. Block Public Access
+- A global setting to block public access at the bucket or account level, overriding any public permissions.
+
+ 7. Logging and Monitoring
+- Server Access Logs: Logs all requests to the bucket for security analysis.
+- AWS CloudTrail: Tracks API activity and identifies unauthorized access.
+- Amazon Macie: Detects sensitive data and potential security risks.
+
+ 8. Bucket Versioning
+- Keeps multiple versions of an object to recover from accidental deletions or overwrites.
+
+ Best Practices:
+- Disable public access unless explicitly required.
+- Use encryption for all sensitive data.
+- Regularly review access policies and logs.
+- Implement least privilege for IAM roles and users.
+
+By leveraging these features and following best practices, you can ensure your S3 buckets and their contents remain secure.
+

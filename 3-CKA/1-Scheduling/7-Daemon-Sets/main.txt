@@ -1,0 +1,5 @@
+Daemon sets are like replica sets, but this deploys one copy of your pod on each nodes
+
+kubectl get daemonsets
+
+kubectl describe daemonsets name_of _daemonset

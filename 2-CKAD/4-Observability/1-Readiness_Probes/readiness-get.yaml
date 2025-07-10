@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-get
+spec:
+  containers:
+    - name: my-container
+      image: my-app-image:latest
+      ports:
+        - containerPort: 80
+      readinessProbe:
+        httpGet:
+          path: /health   # The path to the readiness check endpoint in your application
+          port: 80         # The port on which your application listens
+        initialDelaySeconds: 5  # Delay before the probe is initiated (in seconds)
+        periodSeconds: 10       # How often the probe is performed (in seconds)

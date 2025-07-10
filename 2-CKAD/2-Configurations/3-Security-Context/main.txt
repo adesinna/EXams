@@ -1,0 +1,16 @@
+In Kubernetes, a securityContext defines security settings for Pods or Containers to enhance isolation and restrict privileges.
+
+Pod-level securityContext applies to all containers in a Pod, setting defaults like
+user ID (runAsUser), group ID (runAsGroup), file group permissions (fsGroup),
+or enforcing non-root execution (runAsNonRoot).
+For example, you can specify all containers in a Pod run as a non-root user.
+
+Container-level securityContext allows fine-grained security controls for individual containers,
+overriding Pod-level settings. Examples include enabling a read-only root filesystem (readOnlyRootFilesystem),
+managing Linux capabilities (capabilities), or disallowing privilege escalation (allowPrivilegeEscalation).
+
+By combining Pod and container securityContext, you can enforce security policies globally for
+the Pod while tailoring restrictions for specific containers.
+This approach minimizes risks by adhering to the principle of least privilege,
+preventing unnecessary host access or elevated permissions.
+Proper configuration protects workloads and reduces vulnerabilities.

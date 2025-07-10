@@ -1,0 +1,11 @@
+They are use to pass environment to pass env variables, any of your pods can use the env in the configmap
+
+Now you can reference it in the pod definition file
+
+kubectl get configmaps
+
+kubectl describe configmaps name_of_configmap
+
+
+
+

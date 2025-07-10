@@ -1,0 +1,107 @@
+ Public IP Address
+
+    Definition:
+        A public IP address is a globally unique identifier assigned to a device that connects to the internet.
+        These addresses are routable on the global internet, meaning they allow devices to communicate directly with other
+        devices anywhere in the world.
+
+     Characteristics:
+    1. Global Accessibility:
+       - Devices with public IPs can be accessed directly over the internet. For example, web servers, email servers,
+         and other internet-facing devices use public IPs to receive requests from users worldwide.
+
+    2. Assigned by ISPs:
+       - Public IPs are allocated by Internet Service Providers (ISPs) to customers for use. They may be static
+         (unchanging) or dynamic (changing periodically).
+
+    3. Unique Across the Internet:
+       - Each public IP is globally unique to avoid conflicts between devices on the internet.
+
+    4. Address Range:
+       - Public IP addresses are part of the IPv4 and IPv6 address spaces, except for ranges reserved for private use (detailed below).
+
+     Example:
+       - IPv4: 203.0.113.5
+       - IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+
+     Use Cases:
+    - Hosting websites and applications (e.g., www.example.com resolves to a public IP).
+    - Allowing direct communication for services like video conferencing, remote desktop, or VoIP.
+
+
+
+ Private IP Address
+
+     Definition:
+    A private IP address is an address used within private networks (e.g., homes, businesses, schools) to enable devices
+    to communicate with each other without using the internet. Private IPs are not routable on the public internet.
+
+     Characteristics:
+    1. Internal Communication:
+       - Private IPs enable communication between devices on the same network, such as printers, computers, and smart devices.
+
+    2. Non-Unique Globally:
+       - Private IPs can be reused in multiple networks because they are only meaningful within their specific local network.
+
+    3. Address Range:
+       - The Internet Assigned Numbers Authority (IANA) reserves the following ranges for private use:
+         - Class A: 10.0.0.0 to 10.255.255.255 (Large networks)
+         - Class B: 172.16.0.0 to 172.31.255.255 (Medium-sized networks)
+         - Class C: 192.168.0.0 to 192.168.255.255 (Small networks)
+
+    4. Cannot Access the Internet Directly:
+       - Private IPs require Network Address Translation (NAT), performed by a router or gateway, to communicate with public IPs on the internet.
+
+     Example:
+       - IPv4: 192.168.1.10, 10.0.0.5
+       - IPv6: fd00::1 (Unique Local Address)
+
+     Use Cases:
+    - Internal LAN communication (e.g., file sharing, local web servers).
+    - Private device connectivity (e.g., printers, IP cameras).
+    - Isolated environments such as virtual private clouds (VPCs) in cloud computing.
+
+
+
+ How They Work Together
+
+ Private to Public Communication:
+1. Device with Private IP Sends a Request:
+   - For example, a laptop (192.168.1.5) in a home network wants to access www.google.com.
+
+2. Router Uses NAT:
+   - The router replaces the laptop's private IP with the router's public IP (e.g., 203.0.113.1) and forwards the request to the internet.
+
+3. Internet Server Responds to the Public IP:
+   - Google's server sends the response to the router's public IP.
+
+4. Router Translates Back to Private IP:
+   - The router matches the request and response, forwarding the response back to the laptop with its private IP.
+
+ Benefits of Using Both:
+- Private IPs Save Public Address Space:
+   - With the limited IPv4 address space, using private IPs for internal networks reduces the need for public IPs.
+
+- Security:
+   - Devices with private IPs are hidden from the internet, reducing exposure to attacks.
+
+- Flexibility:
+   - Private IPs allow organizations to design their internal networks without conflicting with other networks.
+
+---
+
+ Key Differences:
+
+| Feature                  | Public IP Address               | Private IP Address            |
+|--------------------------|----------------------------------|-------------------------------|
+| Scope               | Global                          | Local                         |
+| Accessibility       | Direct internet access          | Internal communication only   |
+| Routable            | On the internet                 | Not routable on the internet  |
+| Assigned by         | ISP or hosting provider         | Network administrator         |
+| Unique Globally     | Yes                             | No (can be reused in different networks) |
+| Example             | 203.0.113.5, 8.8.8.8        | 192.168.1.1, 10.0.0.1     |
+
+Let me know if you’d like a practical example or a network diagram!
+
+
+Elastic IP is a public IP that will not change

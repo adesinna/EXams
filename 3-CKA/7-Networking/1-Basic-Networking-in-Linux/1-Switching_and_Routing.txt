@@ -1,0 +1,48 @@
+Suppose two linux systems with network card eth0 on each, how does the two systems communicate with each other,
+they are connected to a switch. Suppose computer A with ip 192.168.1.10/24 and B with ip 192.168.1.11/24 are in a
+network 192.168.1.0. They can communicate with each other if they are linked to a switch.
+
+ip link # to the network face card
+
+ip addr add 192.168.1.10/24 dev eth0  # for computer A
+
+ip addr add 192.168.1.11/24 dev eth0 # for computer B
+
+Now both computer A and B can communicate with each other within the same network.
+
+Although both system can communicate with each other, they can only do so in the same network, suppose they need to
+communicate with another system C and D, in another network ?
+
+This is where router comes in, a router allows two computers in two different network communicates, with each other,
+the router would be connected to the two separate network so it get two ips assigned, one from each of the network.
+
+Now the router is just another device on the network, to  make sure it knows where to forward this traffic to, it needs
+a gateway.
+
+What is a Router?
+A router is a network device that:
+
+Connects two or more different IP networks
+
+Routes packets between them based on IP addresses
+
+Maintains a routing table
+
+May include additional features like DHCP, firewall, NAT, etc.
+
+Example:
+Connects your home LAN (192.168.1.0/24) to your ISP’s network
+
+Knows how to forward traffic to the internet or between local subnets
+
+What is a Gateway?
+A gateway is a more general concept:
+
+It is any device that acts as an access point to another network
+
+In IP networking, the term default gateway usually refers to the IP address of the router that devices send packets
+to when the destination is outside their own subnet.
+
+
+
+

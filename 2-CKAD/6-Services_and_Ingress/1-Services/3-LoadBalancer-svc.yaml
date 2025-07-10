@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: LoadBalancer-svc
+spec:
+  selector:
+    app: your-app-label   # Replace 'your-app-label' with the label used in the pods you want to expose
+  ports:
+    - protocol: TCP
+      port: 80             # Port on the service
+      targetPort: 8080     # Port on the pods
+  type: LoadBalancer

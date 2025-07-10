@@ -1,0 +1,31 @@
+Kubernetes provides several mechanisms for authorization, which determine whether a
+request (made by a user, service account, or system component) is allowed to perform
+a specific action on a resource.
+These mechanisms ensure that only authorized entities can access or modify resources
+within the cluster.
+
+1. RBAC (Role-Based Access Control):
+    RBAC is the most commonly used authorization mechanism in Kubernetes.
+    It allows you to define fine-grained permissions using Roles and RoleBindings or
+    ClusterRoles and ClusterRoleBindings.
+
+2. ABAC (Attribute-Based Access Control)
+    In ABAC, authorization decisions are made based on policies defined in a JSON file.
+    Each policy specifies attributes like user, namespace, and action.
+
+3. Webhook Mode
+    In Webhook authorization, the Kubernetes API server calls an external HTTP service to
+    make authorization decisions. The webhook receives a JSON payload describing the request
+    and returns allow or deny.
+
+Use Case: Highly custom authorization logic, such as integrating with an external policy engine.
+Requires setting --authorization-webhook-config-file in the API server configuration.
+
+4. Node Authorization
+
+Node authorization is specifically designed for Kubernetes nodes.
+It ensures that nodes can only access resources (e.g., Pods, Secrets, ConfigMaps)
+necessary for the workloads scheduled on them.
+
+Requires the system:nodes group and system:node user binding.
+Useful for securing kubelet interactions with the cluster.

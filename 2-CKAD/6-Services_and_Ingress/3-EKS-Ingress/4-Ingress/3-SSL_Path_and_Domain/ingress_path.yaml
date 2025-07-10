@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    # Load Balancer Name
+    alb.ingress.kubernetes.io/load-balancer-name: app-ingress-lb
+
+    # Ingress Core Settings
+    alb.ingress.kubernetes.io/scheme: internet-facing
+
+    # Health Check Settings
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    #Important Note:  Need to add health check path annotations in service level if we are planning to use multiple targets in a load balancer
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+#   alb.ingress.kubernetes.io/target-type: ip # use this when svc type is clusterIP
+
+    ## SSL Settings
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-1:479465295367:certificate/bb680cfc-8bff-4ee4-8a75-adbde85c8dd5
+
+     # SSL Redirect Setting
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+
+
+spec:
+  ingressClassName: alb   # Ingress Class
+  rules:
+    - http:
+        paths:
+          - path: /app1
+            pathType: Prefix
+            backend:
+              service:
+                name: app1-svc
+                port:
+                  number: 80
+          - path: /app2
+            pathType: Prefix
+            backend:
+              service:
+                name: app2-svc
+                port:
+                  number: 80
+          - path: /               # this should be the last
+            pathType: Prefix
+            backend:
+              service:
+                name: app3-svc
+                port:
+                  number: 80
+

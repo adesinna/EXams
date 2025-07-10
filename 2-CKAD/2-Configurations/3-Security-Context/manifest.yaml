@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: combined-security
+spec:
+  securityContext:                      # Pod-level security context
+    runAsUser: 1000                    # Default UID for containers
+    runAsGroup: 2000                   # Default GID for containers
+    fsGroup: 3000                      # Default GID for volume files
+  containers:
+  - name: app-container
+    image: nginx
+    ports:
+    - containerPort: 80
+    securityContext:                    # Container-specific overrides
+      runAsUser: 1001                  # Overrides Pod-level UID
+      readOnlyRootFilesystem: true     # Enforces read-only root filesystem
+      allowPrivilegeEscalation: false  # Prevent privilege escalation
+      capabilities:
+        add: ["NET_ADMIN"]
+        drop: ["ALL"]
+  - name: sidecar-container
+    image: busybox
+    command: ["sh", "-c", "sleep 3600"]
+    securityContext:                    # Specific settings for the sidecar
+      runAsUser: 1002                  # Unique UID for sidecar
+      runAsNonRoot: true
+      readOnlyRootFilesystem: false    # Allows writable root filesystem

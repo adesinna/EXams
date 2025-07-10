@@ -1,0 +1,25 @@
+Readiness Probes:
+
+Pod Status
+
+- Pending:
+    This is when the scheduler is trying to allocate a node to the pod
+
+
+- ContainerCreating:
+    This is when is it getting the image for it to start
+
+- Running:
+    This is when it is working as it should
+
+Readiness is that the application is ready to be used, sometimes the pod might be ready but the
+application isnt. Thats why we use readiness probe. This is just like a test to show that the container is truly ready for incoming network
+
+Now we have to tie the readiness of the pod to the application readiness.
+
+Ways to do this:
+    - You can run an http probe to see if the application is ready # the developer would supply this
+
+    - Tcp socket test
+
+    - Execute a command that will run if the application is

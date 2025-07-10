@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-secret-pod
+  namespace: default
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    volumeMounts:
+    - name: secret-volume
+      mountPath: /etc/secret
+      readOnly: true
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: my-secret-sa-kbbdm

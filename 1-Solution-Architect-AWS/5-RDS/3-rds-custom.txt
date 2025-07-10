@@ -1,0 +1,7 @@
+Amazon RDS Custom is a managed database service designed to support applications that require access to the underlying
+database and operating system. It is ideal for scenarios where you need to customize the database environment for
+specific applications, including legacy systems or third-party software that requires special configurations.
+
+RDS Custom provides the flexibility of self-managed databases while automating routine tasks like backups, scaling, and monitoring.
+
+-ORACLE and Microsoft SQL server

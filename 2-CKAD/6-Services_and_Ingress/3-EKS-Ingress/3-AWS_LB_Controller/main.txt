@@ -1,0 +1,8 @@
+Use the script to down ingress controller
+
+
+You do not need to create ingress class, since helm creates one for you automatically
+but you can create yours by using the sample
+
+
+ingressclass.yaml

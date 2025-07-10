@@ -1,0 +1,3 @@
+Since we have a load balancer we can now put our worker nodes
+in a private subnets and allow load balancer in public subnet, with
+NAT gateway the private subnet can communicate with the internet.

@@ -1,0 +1,47 @@
+Kubernetes project has releases from time to time, v1.3.2  # version major.minor.patch
+
+Each component has its own version, and its compatibility with each other.
+
+The kube-apiserver version must be higher or equal to the version of all the other components.
+
+If kube-apiserver version is X
+then
+controller manager and kube scheduler must be at X or at X-1
+
+kubelet and kube proxy can be at X or X-1 or X-2
+
+kubectl can be at X+1 or X or X-1
+
+
+The kubernetes project only supports the last 3 releases, so you can only stay within the last 3 releases.
+
+You should upgrade one step at a time. It is very easy to upgrade on cloud, but with kubeadm you upgrade master first
+(this does not affect the worker nodes workloads)
+
+
+Upgrading with kubeadm
+
+kubeadm upgrade plan  # this would give you all the information about the cluster
+
+
+Suppose we are moving from 1.11 to 1.12
+
+apt-get upgrade -y kubeadm=1.12.0-00
+
+kubeadm upgrade apply v1.12.0
+
+apt-get upgrade -y kubelet=1.12.0-00
+
+systemctl restart kubelet
+
+redo all and add
+
+Drain node
+
+kubeadm upgrade node config --kubelet-version v1.12.0
+
+systemctl restart kubelet
+
+uncordon the node
+
+Follow documentation

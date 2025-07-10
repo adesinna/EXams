@@ -1,0 +1,56 @@
+You use kubeconfig to authenticate and RBAC to authorize what the users can do, but
+this is only based on the kube-api level, i.e get, list and get.
+
+For example, if a pod is created and you do not want to allow images from a public
+registry, RBAC cannot achieve this.
+
+Admission Controller helps to implement more security measures in the cluster.
+
+We have some admission controller like that comes default
+
+- AlwaysPullImages
+    This ensures everytime a pod is created images are always pulled from registry
+
+- DefaultStorageClass
+    This would automatically add  the default storage class to the pvc
+
+- EvenRateLimit
+    This helps limit the request to the api server so as not to overwhelm it
+
+- NamespaceExists
+    Reject request to namespace that does not exist
+
+
+sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml and do not apply tghe file since it is a static pod
+
+Check for admission controller
+
+You add and disable addmission control using the enable and disable flag
+
+
+kube-apiserver -h | grep -i enable-admission-plugins
+
+
+Mutating Admission Controller
+
+    This can change or mutate the object before creating it, a good example
+    of this is the DefaultStorageClass admission controller, it would add
+    storage class directly to a pvc that storage class is not provided
+
+Validating Admission Controller
+    This one allows or deny a request, example is NamespaceExists
+
+
+
+They are admission controller that can do both, however, it goes through mutating
+first before validating
+
+n Kubernetes, MutatingAdmissionWebhook and ValidatingAdmissionWebhook are two types of admission webhooks used to
+intercept requests to the Kubernetes API server before the object is persisted to etcd.
+They allow custom logic to be executed during API request processing.
+
+
+
+
+
+

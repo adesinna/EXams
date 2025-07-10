@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: example-job
+spec:
+  completions: 3        # Set the desired number of successfully completed pods
+  parallelism: 2       # Set the number of pods that can run in parallel
+  template:
+    metadata:
+      name: example-pod
+    spec:
+      containers:
+      - name: example-container
+        image: my-image:latest
+      restartPolicy: Never # this makes sure when the job is done it should not restart

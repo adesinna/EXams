@@ -1,0 +1,31 @@
+Authentication is the securing access to the cluster, we would be discussing users access to the cluster, such as admins
+and developers, bots using service accounts. Kubernetes does not manage users or create users, but only service
+accounts.
+
+The kubectl sends request to the API server, then the api server would authenticate and
+
+Authentication Mechanism:
+
+1. Static Password File
+You can create a list of users and passwords in a csv file
+
+password1,user1,u0001, group1  # you can optionally add groups
+password2,user2,u0002
+...
+passwordN,userN,u000N
+
+
+This file will now be passed as file to the kube-api-servet
+
+--basic-auth-file=user-details.csv
+
+
+2. Static Token file
+It is similar to the password file but instead of password you can specific a token instead and also pass it as an option
+to the kube-api-server
+
+These two are not the recommended approach. Using TLS certificates is the recommended way.
+
+
+
+

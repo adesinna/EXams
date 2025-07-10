@@ -1,0 +1,25 @@
+What is an EBS Snapshot?
+An EBS Snapshot is a point-in-time backup of an Amazon Elastic Block Store (EBS) volume. It is stored in Amazon S3 and provides a way to back up and restore EBS volumes. Snapshots capture only the blocks that have changed since the last snapshot, making them incremental and cost-efficient.
+
+Snapshots can be used to:
+
+- Restore data in case of failure.
+
+- Create new EBS volumes in the same or a different Availability Zone (AZ) or region.
+
+- Migrate volumes between regions.
+
+
+EBS Snapshots Features
+
+- EBS snapshot Archive
+    Move a snapshot to an archive tier that is 75% cheaper
+    It takes within 24 to 72 hours to restore the blocks
+
+- Recycle Bin for EBS
+    Setup rules for deleted snapshot to get it back
+
+
+- Fast Snapshot Restore
+
+    Force full intialization of snapshot

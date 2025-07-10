@@ -1,0 +1,24 @@
+Every pod needs an amount of resources for it to run on the node.
+
+Resources are the needed memory and cpus the pod needs,  while the limit is the maximum
+resources it can use on a node.
+
+see 1-pod-1.yaml
+
+The scheduler looks for a node that have this resource available, the limit is the max it can consume
+on the node which the pod is scheduled.
+
+see pod-2.yaml
+
+However, a pod cannot consume more than its cpu limit but can exceed the limit of the memory,
+and the pod will be terminated.
+
+The best is to just set request without using limits. Because if pod A is limited and there is extra
+resource, it wont be able to get it. Dont restrict pods if the others pods can free their resources.
+
+Limit Range
+    This works at the namespace level, defines the total request and limits
+
+ResourceQuota  helps to limit the total resources consumed by a namespace.
+It sets maximum limits on the number of resources like Pods, CPU, memory, and
+persistent volume claims that can be created in a namespace.

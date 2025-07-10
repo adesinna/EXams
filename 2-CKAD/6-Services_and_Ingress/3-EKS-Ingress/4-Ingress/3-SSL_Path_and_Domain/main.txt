@@ -1,0 +1,13 @@
+Get your domain name
+
+When getting cert
+
+    domain.com
+    *.domain.com
+
+Go to hosted zone and use the cname.domain  and cname_value
+
+Use the ns record on the domain provider so you can do all your settings on aws
+
+
+

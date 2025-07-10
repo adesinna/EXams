@@ -1,0 +1,25 @@
+A StatefulSet in Kubernetes is a workload API object used to manage stateful applications.
+Unlike Deployments, which are suited for stateless applications.
+StatefulSets are designed to manage the deployment and scaling of a set of pods
+with guaranteed ordering, uniqueness, and persistent storage.
+
+
+Key Features of StatefulSets
+
+Stable Identifiers:
+    Each pod in a StatefulSet gets a stable and unique name.
+    For example, if the StatefulSet is named mysql, the pods will be named mysql-0, mysql-1, etc.
+
+Stable Storage:
+    Each pod is associated with a PersistentVolume (PV) that retains data across pod restarts.
+
+Ordered Deployment and Scaling:
+    Pods are created in order (mysql-0, mysql-1, etc.).
+    Pods are terminated in reverse order.
+
+Ordered Updates:
+    StatefulSets ensure updates are applied sequentially, pod by pod.
+
+Network Identity:
+    Each pod gets a stable network identity (DNS) based on its name.
+    This allows applications like MySQL to form clusters or master-slave configurations reliably.

@@ -1,0 +1,13 @@
+Suppose you want to update one of your nodes, there is a pod eviction time of 5 mins, if the pods is in a replica set
+it would try to create it and schedule it on the other nodes, if not it would be evicted.
+
+Best approach is to drain the node first, draining the node would move all workload to other nodes, this node becomes
+cordoned (marked as unschedulable), when done you have to uncordon the node for it to be schedulable
+
+kubectl drain  node_name   # step1
+
+kubectl uncordon node_name # step 2
+
+If you hust want to make it unschedulable without evicting the pods
+
+kubectl cordon node_name # just makes the node unschedulable

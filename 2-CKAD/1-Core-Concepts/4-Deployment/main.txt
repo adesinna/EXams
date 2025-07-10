@@ -1,0 +1,26 @@
+Deployment allows you to create pods and replica sets, this will allow you to be able to scale in and scale out depending
+on the need.
+
+
+kubectl create -f deploy.yaml
+
+kubectl get deploy #
+
+kubectl get rs
+
+kubectl get pods
+
+kubectl delete deploy deploy_name
+
+You can make changes to the definition file
+
+kubectl apply -f deploy.yaml
+
+kubectl rollout status deployment_name # this will get the status of the deployment
+
+kubectl rollout undo deployment/nginx-deployment # this would go to the previous version
+
+kubectl rollout history deployment/nginx-deployment # this would check history of deployment
+
+kubectl rollout undo deployment/nginx-deployment --to-revision=<revision-number> # goes to the specific deployment
+

@@ -1,0 +1,34 @@
+Vertical scaling refers to increasing the capacity of a single machine (server) by adding more CPU, RAM, storage,
+or processing power to handle higher workloads.
+
+Horizontal scaling refers to adding more machines (nodes) to a system and distributing the workload across them.
+
+Vertical Scaling vs. Horizontal Scaling
+
+When scaling a system to handle increased load, you can choose between vertical scaling (scaling up) and horizontal scaling (scaling out). Here’s a breakdown of the differences:
+
+| Feature          | Vertical Scaling                     | Horizontal Scaling                  |
+|----------------------|------------------------------------------|------------------------------------------|
+| Definition       | Adding more power (CPU, RAM, storage) to an existing machine. | Adding more machines/nodes to distribute the load. |
+
+
+| Complexity       | Simpler (no need for distributed systems logic). | More complex (requires load balancing, distributed databases, etc.). |
+
+| Cost             | Expensive (high-end hardware costs rise exponentially). | Cheaper (uses commodity hardware). |
+
+| Performance      | Limited by the maximum hardware capacity. | Can scale almost infinitely by adding more nodes. |
+
+| Single Point of Failure (SPOF) | Yes (if one server fails, the system goes down). | No (failure of one node doesn’t crash the system). |
+
+| Downtime         | Requires downtime for upgrades. | Minimal downtime (nodes can be added/removed dynamically). |
+
+| Use Cases        | Databases like MySQL (standalone), legacy applications. | Cloud-native apps, microservices, distributed databases (Cassandra, MongoDB). |
+
+
+- Vertical Scaling: Best for small to medium workloads where simplicity is key.
+- Horizontal Scaling: Best for large-scale, high-availability systems (e.g., cloud services, web apps).
+
+Many modern systems use a hybrid approach (e.g., scaling vertically for databases and horizontally for web servers).
+
+You can both scale workloads or infrastructure scaling in kubernetes.
+We use cluster autoscaling for infrascture, and horizontal pod autoscaling and vertical pod autoscaling  for workload

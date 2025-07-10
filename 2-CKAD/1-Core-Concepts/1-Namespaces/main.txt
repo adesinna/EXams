@@ -1,0 +1,24 @@
+Namespaces:
+    It provides a mechanism for isolating groups of resources within a single cluster.
+    The names of resources must be unique within the name space.
+
+        kubectl get ns or namespace
+
+        kubectl create ns shinakube
+
+        kubectl get all -n shinakube # all the resources in the namespace
+
+        specify namespace
+
+        kubectl create -f definition_file.yaml -n shinakube
+
+        kubectl apply -f df.yaml  -n shinakube # if changes were made to the file
+
+        kubectl get pods -n shinakube # get all pods in namespace shinakube
+
+        kubectl delete ns shinakube # delete it and all the resources
+
+
+        to connect to another ns from one ns
+
+        service-name.namespace.svc.cluster.local

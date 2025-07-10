@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-tcp
+spec:
+  containers:
+    - name: my-container
+      image: my-app-image:latest
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet:
+            tcpSocket:
+                port: 3306 # the socket to test

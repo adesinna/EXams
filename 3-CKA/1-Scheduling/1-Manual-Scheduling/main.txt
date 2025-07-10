@@ -1,0 +1,8 @@
+Suppose there is no scheduler to schedule pods on the node, then you would need to manually
+schedule it on the node, this is done by adding the field nodeName to the pod definition file.
+When a pod is created the nodename can not just be added, there is always a binding object that
+would be created for it to map the pod to the node.
+
+If there is no scheduler the nodename name field would schedule the pod if it is specified while the
+pod is being created but if it has being created you must create a binding object to binding it to a node
+instead of using nodename.

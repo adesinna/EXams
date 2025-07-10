@@ -1,0 +1,41 @@
+Suppose two systems are connected in a network and can communicate to each other, if system A needs to talk to system B
+you can use
+
+ping ip_B
+
+Suppose system B name is db, you want to use the name instead of the using the ip address to reach system B via system A,
+one way to this is to add name and ip addr of B in the file /etc/hosts. Now the system would be able to reach B via its
+name.
+
+This method, has one problem because no matter what hostname on the System B is, as long as you put db in the /etc/hosts
+file, it would always refer to B as db, that is it does not even verify what the real name of host B is.
+
+This set up is simple when a few systems is used, suppose we have multiple systems, like 1000, would you have to do this
+in all 1000. Now this was moved a  server called the DNS server, that can manage all these hosts name centrally. Now
+we point all the hosts to point to the DNS server when trying to resolve for the name.
+
+You add the dns server ip add /etc/resolv.conf
+
+nameserver 192.168.1.100
+
+
+But if you add /etc/hosts and to the nameserver too, the hosts would first local /etc/hosts file first before checking
+the nameserver.
+
+
+Suppose they name is not on the local and your nameserver, you can add this google nameserver in the dns server, telling
+it to forward unknown to 8.8.8.8
+
+Delineating domain name
+www.polom.com
+
+.    # this is the root
+.com # this is the top level domain
+polom # the domain name
+www # subdomains
+
+
+When we try to reach www.polom.com from within your organization or computer, it first hits your internal DNS server, and
+try to resolve it, if it can then it goes to the root DNS server and forwards it to the DNS server serving .com and forwards
+to the dns server serving polom, then it is resolved to the ip serving the subdomain. This could be cache for it not to take
+this same trip again.

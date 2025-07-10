@@ -1,0 +1,20 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: test-priority
+value: 100000
+globalDefault: false # if true, then all pods without priority would take this
+description: "Very high priority and can preempt lower ones"
+preemptionPolicy: PreemptLowerPriority # this kicks out lower priority pods, but if set to Never it won't
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+  priorityClassName: test-priority

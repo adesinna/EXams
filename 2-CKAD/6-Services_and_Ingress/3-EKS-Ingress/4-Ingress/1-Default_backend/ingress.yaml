@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nginxapp1
+  labels:
+    app: app1-nginx
+  annotations:
+    # Load Balancer Name
+    alb.ingress.kubernetes.io/load-balancer-name: app1ingressrules
+
+    # Ingress Core Settings
+    alb.ingress.kubernetes.io/scheme: internet-facing # publicly accessible, internal for within the EKS
+
+    # Health Check Settings
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-path: /app1/index.html
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2' # number of times to check
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2' # number of times to check
+spec:
+  ingressClassName: alb # Ingress Class
+  defaultBackend:
+    service:
+      name: app1-nginx-nodeport-service
+      port:
+        number: 80
+
+

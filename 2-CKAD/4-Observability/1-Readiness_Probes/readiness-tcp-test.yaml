@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-tcp
+spec:
+  containers:
+    - name: my-container
+      image: my-app-image:latest
+      ports:
+        - containerPort: 80
+      readinessProbe:
+        httpGet:
+            tcpSocket:
+                port: 3306 # the socket to test

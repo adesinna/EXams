@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+  annotations: # this is used for information for integration with some external tools
+    buildversion: 1.34
+spec:
+  replicas: 3
+  selector: # it would select the labels that match
+    matchLabels:
+      app: nginx # get the pods with this label
+  template:
+    metadata:
+      labels:
+        app: nginx # labelling the pod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80

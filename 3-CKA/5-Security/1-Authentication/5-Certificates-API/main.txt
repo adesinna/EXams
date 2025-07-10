@@ -1,0 +1,20 @@
+K8s certificate api this sends a certificate signing request for new admins, instead of logging to the CA server, the api
+allows you to sign  certs for new admins and approves it.
+
+A new user creates a key and cert request that needs to be signed.
+
+# Create a private key
+openssl genrsa -out myuser.key 3072
+
+# Change the common name "myuser" to the actual username that you want to use
+openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser"
+
+cat myuser.csr | base64 | tr -d "\n"
+
+kubectl get csr
+
+kubectl certificate approve myuser
+
+kubectl certificate delete myuser
+
+

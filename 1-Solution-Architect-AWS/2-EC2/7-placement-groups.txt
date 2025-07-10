@@ -1,0 +1,65 @@
+This is how your ec2 instances are arranged
+
+Types of Placement Groups
+
+1. Cluster Placement Group:
+Purpose: Optimized for low-latency, high-throughput workloads.
+
+Placement: Instances are placed in close proximity within a single Availability Zone (AZ).
+
+Use Case:
+
+    High-performance computing (HPC).
+    Applications requiring high-speed communication between instances.
+    Big data workloads, like Hadoop clusters or machine learning training.
+
+Advantages:
+
+    Reduced network latency.
+    Increased network bandwidth between instances.
+Disadvantages:
+
+    Risk of failure since all instances are in the same AZ.
+    Limited capacity—if the requested instance types are unavailable in the same AZ, placement may fail.
+
+
+2. Spread Placement Group:
+Purpose: Optimized for fault tolerance by spreading instances across multiple hardware racks.
+
+Placement: Instances are placed on distinct underlying hardware, either within a single AZ or across multiple AZs.
+
+Use Case:
+
+    Applications requiring high availability.
+    Workloads that must avoid simultaneous hardware failures, such as database clusters.
+
+Advantages:
+
+    Greater fault tolerance; hardware failure affects fewer instances.
+    Useful for critical workloads.
+
+Disadvantages:
+
+    Increased network latency compared to cluster placement groups.
+    Limited to a maximum of 7 running instances per AZ.
+
+
+3. Partition Placement Group:
+Purpose: Optimized for large-scale distributed applications with fault isolation.
+
+Placement: Instances are divided into logical partitions, each placed on distinct hardware racks.
+Multiple instances in the same partition share the same hardware.
+
+Use Case:
+
+    Big data processing frameworks like Apache Cassandra, HDFS, or Kafka.
+    Applications that need fault isolation but also run a large number of instances.
+
+Advantages:
+
+    Fault isolation between partitions.
+    Scalable for large workloads.
+
+Disadvantages:
+
+Higher latency between partitions compared to a cluster placement group.

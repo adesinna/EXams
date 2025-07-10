@@ -1,0 +1,117 @@
+The concept of volume is storing data of the container that is running, if the container is restarted or delete storage
+can wipe out.  It is always better to have a volume attached to the container.
+
+Volumes are permanent storage for your containers, so if container is restarted nothing will happen to the container storage.
+
+If you delete your pod, and use the volume of empty dir volume, the volume in k8 will also be deleted.
+So in the pod perspective the storage becomes ephemeral again.
+
+This is why we have pv and pvc.
+
+Persistent Volume:
+    This will have to be provisioned by an administrator, pv will be created in the cluster, it will be store data permanently.
+    It can be created through static or dynamic way.
+
+    Static:
+        These are PV that are provisioned by cluster administrator, which can be managed by k8 api-server
+
+
+    Dynamic:
+        These are PV that are created automatically based on the request.
+        It uses a storage class to identify the storage that is needed to be created.
+
+
+Persistent Volume Claim:
+    This is a request of storage from the PV, the PVC consume the PV resources, the way a pod consume the needed
+    resource for it to run. They request for specific size and access mode.
+
+    PV and PVC should always be one to one mapping.
+
+ReadWriteOnce (RWO):
+
+    This mode allows the volume to be mounted as read-write by a single node (Pod) at a time.
+    It's suitable for scenarios where a volume should be mounted as read-write by only one Pod, providing exclusive access to that Pod.
+    Common use cases include running a single-instance database like MySQL or PostgreSQL.
+
+ReadOnlyMany (ROX):
+
+    This mode allows the volume to be mounted as read-only by multiple nodes (Pods) simultaneously.
+    It's suitable for scenarios where multiple Pods need to read from the same data source, but no Pod is expected to modify the data.
+    Common use cases include sharing configuration files or static assets among multiple Pods.
+
+ReadWriteMany (RWX):
+
+    This mode allows the volume to be mounted as read-write by multiple nodes (Pods) simultaneously.
+    It's suitable for scenarios where multiple Pods need both read and write access to the same data source simultaneously.
+    Common use cases include shared storage solutions like NFS, where multiple Pods need to read and write to a common file system.
+
+
+
+In Kubernetes, binding policies determine how PersistentVolumeClaims (PVCs) are bound to PersistentVolumes (PVs).
+These policies are particularly important when you're dealing with pre-provisioned volumes
+or specific storage requirements.
+
+Here are the key binding policies:
+
+1. Immediate Binding (Default Behavior)
+How It Works:
+The PVC is immediately bound to an available PV that meets its requirements as soon as the PVC is created.
+
+Use Case: This is useful in environments where PVs are pre-provisioned by an administrator,
+and there’s no need to wait for dynamic provisioning.
+The system immediately binds the PVC to the best match available.
+
+Behavior: Kubernetes will match and bind the PVC to a suitable PV as soon as the PVC is created.
+If no suitable PV is available, the PVC remains unbound until one is created or becomes available.
+
+Configuration: This is the default behavior and doesn’t require any special configuration.
+
+
+2. WaitForFirstConsumer Binding (Delayed Binding)
+
+How It Works:
+
+The PVC binding is delayed until a Pod that uses the PVC is scheduled.
+The binding will happen based on the Pod’s location, allowing the system to consider the node's availability, locality, and other factors.
+
+Use Case:
+This is particularly useful in multi-zone or multi-node clusters,
+where you want to ensure that storage is provisioned in the same zone or
+close to the node where the Pod will run. It avoids scenarios where a volume might
+be provisioned in one zone but the Pod is scheduled in another, which could lead to
+performance issues or failures if the storage is zone-specific.
+
+Behavior:
+The PVC will not bind to a PV until the Pod that uses it is scheduled.
+This allows Kubernetes to choose a PV that is most appropriate for the node where the Pod will run.
+
+Reclaim Policy
+How It Works:
+Reclaim policies define what happens to a PersistentVolume when the
+PVC that is bound to it is deleted.
+
+Types:
+
+Retain:
+The PV is not deleted when the PVC is deleted. Instead,
+it is released from its claim, but the underlying storage remains intact.
+This allows an administrator to manually recover the data or reuse the PV.
+
+Delete: The PV and the underlying storage are automatically deleted when the PVC is deleted.
+This is useful for temporary or disposable data.
+
+Recycle:
+The volume's data is deleted (scrubbed), and the PV is returned to the pool of available volumes.
+(Note: The Recycle policy is deprecated and no longer supported in many environments.)
+
+
+Note:
+    PVC is a namespace resource, while PV is a cluster wide resource
+
+
+    kubectl get sc
+
+    kubectl get pv
+
+    kubectl get pvc -n namespace
+

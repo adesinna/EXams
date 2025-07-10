@@ -1,0 +1,13 @@
+Labels and Selectors are used to map pods to nodes, like filtering
+
+Labels are properties of k8s objects, selectors use labels for filtering.
+
+kubectl get pods --selector key1=val1 # this will get pods that have only that label
+
+annotations:
+ this is used for information for integration with some external tools
+
+
+kubectl get pods --selector bu=finance --no-headers | wc -l # no headers is needed to use the wc -l to count correctly
+
+kubectl get all --selector env=prod,bu=finance,tier=frontend # the object that has the intersection of these stuffs

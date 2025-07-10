@@ -1,0 +1,54 @@
+Load Balancer distributes the traffic to your backend services, and it can
+do health check making sure that it routes traffic to it.
+
+They can be public or private load balancer
+
+
+Types
+
+- Classic Load Balancer
+
+- Application Load Balancer
+
+- Network Load Balancer
+
+- Gateway Load Balancer
+
+
+Application Load Balancer
+
+- This is a layer 7(HTTP), it allows you to route to multiple http application
+
+- Load balancing to multiple applications on the same machine ( pods and containers)
+
+- Supports HTTP/2 and websocket, it also allow http to https redirect
+
+- Host based and path based routing
+
+- Query string routing too
+
+- Great for ECS and EKS
+
+They can route to
+
+Auto Scaling groups
+ECS
+Lamda function
+Private IPs
+Multiple Target groups
+
+
+
+Network Load Balancer
+
+Forward TCP and UDP traffic to your instances (layer 4)
+
+It is high performances
+
+It has static ips per AZ
+
+Health check is on TCP, HTTP and HTTPS
+
+Gateway load balancer
+
+3rd party verification

@@ -1,0 +1,9 @@
+They can be replications in an s3 bucket
+
+Cross-Region Replication (CRR):
+    Replicates data between buckets in different AWS
+    regions for disaster recovery, latency reduction, and compliance.
+
+Same-Region Replication (SRR):
+    Replicates data between buckets within the same
+    AWS region to meet data residency or operational requirements.

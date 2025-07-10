@@ -1,0 +1,10 @@
+You would create a role and create a role binding object that ties the users to the role created. Roles and Role binding
+are used for resources that can confined within a name spaces, like pods, secrets, pvc and so on
+
+kubectl get roles
+kubectl get rolebindings
+
+
+kubectl auth can-i create pods # to see if you can create pods
+
+kubectl auth can-i create pods --as dev-user # if you an admin you can check for others

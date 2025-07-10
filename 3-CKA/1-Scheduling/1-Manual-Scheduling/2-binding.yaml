@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+
+---
+apiVersion: v1
+kind: Binding
+metadata:
+  name: my-pod  # Must match the pod name
+target:
+  apiVersion: v1
+  kind: Node
+  name: my-node  # Replace with the actual node name

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: my-limit-range      # Name of the LimitRange object
+  namespace: your-namespace # Namespace in which this LimitRange is applied
+spec:
+  limits:
+  - type: Container         # This LimitRange is applied to containers within a Pod
+    max:
+      cpu: "1"              # Maximum CPU that can be requested or limited for a container is 1 CPU core
+      memory: 512Mi         # Maximum memory that can be requested or limited for a container is 512 MiB
+    min:
+      cpu: "100m"           # Minimum CPU that can be requested for a container is 100 millicores (0.1 CPU)
+      memory: 50Mi          # Minimum memory that can be requested for a container is 50 MiB
+    default:
+      cpu: "500m"           # Default CPU limit applied to a container if not specified is 500 millicores (0.5 CPU)
+      memory: 256Mi         # Default memory limit applied to a container if not specified is 256 MiB
+    defaultRequest:
+      cpu: "200m"           # Default CPU request applied to a container if not specified is 200 millicores (0.2 CPU)
+      memory: 100Mi         # Default memory request applied to a container if not specified is 100 MiB
+

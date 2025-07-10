@@ -1,0 +1,5 @@
+To get the logs
+
+kubectl logs pod-name
+
+kubectl logs -f pod-name  # to get  the live logs

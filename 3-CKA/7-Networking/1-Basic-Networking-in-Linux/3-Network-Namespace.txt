@@ -1,0 +1,3 @@
+Network namespaces are used to isolate container in a host. When a container is created, you create a namespace that would
+have its own network interface. To connect this network namespace to a virtual switch. The local host can act has a
+route and gateway for the namspaces

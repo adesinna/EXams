@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - web
+      containers:
+      - name: my-container
+        image: nginx
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /health   # The path to the readiness check endpoint in your application
+            port: 80        # The port on which your application listens
+          initialDelaySeconds: 5  # Delay before the probe is initiated (in seconds)
+          periodSeconds: 10       # How often the probe is performed (in seconds)
+        livenessProbe:
+          httpGet:
+            path: /live     # The path to the liveness check endpoint in your application
+            port: 80        # The port on which your application listens
+          initialDelaySeconds: 5  # Delay before the probe is initiated (in seconds)
+          periodSeconds: 10       # How often the probe is performed (in seconds)
+      tolerations:
+      - key: app
+        operator: Equal
+        value: web
+        effect: NoSchedule

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - web
+      containers:
+      - name: my-container
+        image: nginx
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+      tolerations:
+      - key: app
+        operator: Equal
+        value: web
+        effect: NoSchedule

@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql # the name of the svc
+  labels:
+    app: mysql
+spec:
+  ports:
+  - port: 3306
+    name: mysql
+  clusterIP: None # Headless service for StatefulSet
+  selector:
+    app: mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql # Must match .spec.template.metadata.labels
+  serviceName: "mysql"
+  replicas: 3 # Number of MySQL pods
+  template:
+    metadata:
+      labels:
+        app: mysql # Must match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: mysql:8.0 # MySQL image
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "rootpassword" # Use Kubernetes secrets in production
+        - name: MYSQL_DATABASE
+          value: "exampledb"
+        - name: MYSQL_USER
+          value: "exampleuser"
+        - name: MYSQL_PASSWORD
+          value: "examplepassword"
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql # Persistent data storage
+  volumeClaimTemplates:  # allows each pods to have its on pv and pvcs, instead of sharing
+  - metadata:
+      name: mysql-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "my-storage-class" # Replace with your storage class
+      resources:
+        requests:
+          storage: 10Gi # Update storage size as required
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  containers:
+  - name: backend
+    image: backend-app:latest
+    env:
+    - name: MYSQL_HOST
+      value: "mysql" # Headless service name
+    - name: MYSQL_PORT
+      value: "3306"
+    - name: MYSQL_DATABASE
+      value: "exampledb"
+    - name: MYSQL_USER
+      valueFrom:
+        secretKeyRef:
+          name: mysql-credentials
+          key: username
+    - name: MYSQL_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysql-credentials
+          key: password

@@ -1,0 +1,76 @@
+What is an EBS Volume?
+
+An Amazon Elastic Block Store (EBS) volume is a scalable, block-level storage service
+provided by AWS. It is designed to be used with Amazon EC2 instances, providing persistent,
+high-performance storage for applications and data.
+
+EBS volumes function like virtual hard drives (since they are connected over the network that can be attached
+to EC2 instances. They allow you to store data persistently, even if the instance is stopped
+or terminated (depending on the volume type).
+
+Characteristics of EBS Volumes
+
+Block Storage:
+
+EBS is block-level storage, meaning data is stored in fixed-size blocks, enabling low-latency access and
+flexibility to run different types of applications like databases or file systems.
+
+Persistent:
+
+Data on an EBS volume persists independently of the lifecycle of an EC2 instance.
+Customizable Size and Performance:
+
+You can choose the size (1 GiB to 64 TiB) and performance characteristics (IOPS and throughput) to suit your workload.
+
+Resilient:
+
+EBS volumes are automatically replicated within their Availability Zone to protect against hardware failures.
+
+Attach/Detach:
+
+Volumes can be attached to or detached from EC2 instances dynamically.
+
+
+You can choose to delete the EBS volume on termination of the ec2 instance
+
+
+
+
+EBS Instance Store:
+
+This has higher performance than block storage, because it is a physical hardware drive that is
+connected to the instance.
+
+
+Volume type
+
+Amazon Elastic Block Store (EBS) provides several types of storage volumes, each optimized for different use cases.
+Here are the primary types of EBS volumes:
+
+Comparison Chart
+
+| Volume Type           | Use Case                        | Max IOPS/Volume        | Max Size  | Max Throughput/Volume  | Price     |
+|-----------------------|---------------------------------|------------------------|-----------|------------------------|-----------|
+| gp3               | General workloads              | 16,000                | 16 TiB    | 1,000 MiB/s            | Moderate  |
+| gp2               | General workloads              | 16,000                | 16 TiB    | 250 MiB/s              | Moderate  |
+| io1               | High-performance DBs           | 64,000                | 64 TiB    | 1,000 MiB/s            | High      |
+| io2               | Critical DBs (higher durability)| 64,000                | 64 TiB    | 1,000 MiB/s            | Higher    |
+| io2 Block Express | Massive, high-performance apps | 256,000               | 64 TiB    | 4,000 MiB/s            | Premium   |
+| st1               | Big data/logs                  | 500                   | 16 TiB    | 500 MiB/s (burst)      | Low       |
+| sc1               | Backup/archive                 | 250                   | 16 TiB    | 250 MiB/s (burst)      | Lowest    |
+
+---
+
+Key Takeaway:
+- Choose gp3 for most applications requiring balance and flexibility.
+- Use io1/io2 for high-performance database workloads and allows multiple instance attached to it
+- Opt for st1 and sc1 for cost-effective storage of sequential or infrequent access data.
+
+
+
+EBS Volume Encryption:
+
+An encrypted Amazon Elastic Block Store (EBS) volume is an EBS volume that uses encryption to protect data at rest,
+data in transit between the volume and its associated EC2 instance, and all snapshots created from the volume.
+EBS encryption is based on AWS Key Management Service (KMS) and helps meet compliance and security requirements.
+

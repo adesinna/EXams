@@ -1,0 +1,21 @@
+The pods are scheduled on the node by the default scheduler, however, you can have
+your own customized scheduler with your own rules.
+You can deploy the scheduler as a pod and pass the configuration into it as an arg,
+in case there are multiple deployment you can make one the leader (master in db)
+
+To assign a pod to the scheduler you specific the spec.schedulerName
+
+To see which scheduler picked the pod up
+
+kubectl get events -o wide
+
+The default scheduler would have his own configuration file, and the additional
+schedulers would have their own default names.
+
+See an example
+
+1. You create a custom scheduler-config.yaml file
+
+2. Create your kubeconfig file for authentication into the cluster.
+
+3. run the scheduler as a pod

@@ -1,0 +1,21 @@
+Suppose there is no master node in the cluster, the worker nodes can still use the kubelet to
+create pods, these pods are called static pods, they are located in /etc/kubernetes/manifests,
+the definition files for the pods are located here and if you delete the file the pod
+also get deleted. You can only create pods this way, not other objects.
+To know where this path is configured, it is passed as an option while running the service
+
+--pod-manifest-path=/etc/kubernetes/manifests  or some path
+
+Another alternative way is to pass in another file, using the config option
+--config=pathconfig.yaml # this is different from kubeconfig file and its in the kubelet config file at /var/lib/kubelet
+then pass this in the pathconfig.yaml file
+
+staticPodPath: /somepath
+
+Since there is no api-server, you cannot check or see this pod using kubectl, however if there is
+a cluster, the kubeapi-server would still be able to see this pods in a read only mode, the kubelet
+would create this static pods, but would mirror it for the kubeapi-server in read only mode.
+
+Use case:
+Since you cannot delete static pods using kubeapi-server, you can use it to deploy the control
+plane itself as pods on nodes.

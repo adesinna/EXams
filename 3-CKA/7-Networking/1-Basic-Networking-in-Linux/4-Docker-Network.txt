@@ -1,0 +1,19 @@
+When a container is created in docker, it creates a default network called bridge, there are others like host and none.
+host connects to the host network, and none does not put it in any network.
+
+docker run --network none nginx
+
+# no one can reach the container
+
+
+
+docker run --network host nginx
+
+The container is connected to the host network, if you run a container on port 80, it automatically maps to port 80
+on the host.
+
+docker run --network bridge nginx
+
+The default network
+
+Every container get a namespace when created and are linked to the bridge network

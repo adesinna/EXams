@@ -1,0 +1,29 @@
+Whenever a user wants to authenticate into the cluster
+
+kubectl get pods
+    --server my-kube-cluster
+    --client-key admin.key
+    --client-certificate admin.crt
+    --certificate-authority ca.crt
+Instead of doing this we can move all these information into a config file called kubeconfig, k8s always file the file
+at ~/.kube/config
+
+It has 3 sections
+- Clusters
+    These are the different clusters you would like to access
+
+- Users
+    These are the different users that would like to connect to the clusters
+
+- Contexts
+    These links the cluster to the users
+
+
+
+You can change current-context to whatever default you prefer (staging-context or prod-context).
+
+This config can be used with kubectl --kubeconfig=/path/to/config.
+
+kubectl config view # this shows the current config
+
+kubectl config use-context user@cluster

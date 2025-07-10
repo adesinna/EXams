@@ -1,0 +1,74 @@
+The aim of kubernetes is to deliver your application in form of containers, it does these by using a master node and some
+worker nodes.
+
+A cluster is a group of nodes, where your applications are running
+
+Docker vs container-d:
+    K8 was built to orchestrate docker containers, but as it grew in popularity, other containers also wanted to work
+    k8. Now they built Container Runtime Interface(CRI) for every container runtime that comply with Open Container Initiative(OCI),
+    but  CRI did not work with docker, since docker was built way before CRI. Container-d is what docker is built on and or any
+    other container runtime is built on.
+    Using crictl instead of docker in the commands will work for other container runtime. It is also aware of pods
+
+
+
+
+ETCD:
+    This is a distributed key-value store that is Simple, Secure and Fast.
+    Every information you get about the objects in k8 are stored and gotten from the
+    ETCD server. It stores information like python dictionary.
+    If kubeadm is used to set up the k8 cluster, then it deploys the etcd server as a pod in the namespace kube-system.
+
+
+
+
+
+Kube-API Server:
+    This is the primary manages the communication between CLI and cluster.
+    It is deployed as a pod when we use kubeadm, the authentication certificates is in the set ups(we do more of this later)
+    kubectl get pods -n kube-system # you see all the components
+
+
+Kube-controller Manager:
+    It monitors the state of the nodes and rectifies the problem.
+        Node Controller:
+            Checks the health of the nodes and reassign the pods to the healthy ones if the current node fails
+
+        Replication Controller:
+            Makes sure the replicate set is maintained.
+
+    To see the things the controller is managing go to
+
+    /etc/kubernetes/manifests/kube-controller-manager.yaml
+
+Kube Scheduler:
+    They decide which pod goes on which node based on some set of rules given by the nodes.
+
+Kubelet:
+    It listens for instruction from the kube-api, also reports back to it.
+
+Kube-Proxy:
+    This is the network of the worker node.
+
+Container Runtime Engine:
+    This is what deploys the container on the worker node, the kubelet instructs it.
+
+
+
+# or any other one to see the process
+
+Kubelet is not automatically downloaded when using kubeadm, so you must use binary
+
+
+kubectl cluster-info # You can get the cluster information
+
+minikube ip # as the local host of minikube
+
+kubectl port-forward svc/nginx-service 31235:80 --address 0.0.0.0 &
+
+nodeport:podsvc   # this how to get minikube to work on browser
+
+To give alias
+
+echo 'alias k=kubectl' >> ~/.bashrc
+source ~/.bashrc

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  nodeName: my-node   # Replace with the actual node name
+  containers:
+    - name: my-container
+      image: nginx
+      ports:
+        - containerPort: 80

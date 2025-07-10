@@ -1,0 +1,5 @@
+With open source monitoring tools, but with metric server you can get little inside on the nodes and pods
+
+kubectl top nodes
+
+kubectl top pods   

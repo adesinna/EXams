@@ -1,0 +1,74 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-storage
+provisioner: efs.csi.aws.com  # Provisioner for EFS CSI driver
+parameters:
+  fileSystemId: fs-12345678  # Replace with your EFS file system ID
+  directoryPerms: "700"  # Permissions for the directory created for the PVC
+  gidRangeStart: "1000"
+  gidRangeEnd: "2000"
+  provisioningMode: efs-ap  # Use EFS Access Points for mounting
+  uid: "1000"
+  gid: "1000"
+reclaimPolicy: Retain  # Retain the PV even after the PVC is deleted
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-efs-1
+spec:
+  storageClassName: efs-storage  # Reference to the EFS StorageClass
+  accessModes:
+    - ReadWriteMany  # Multiple nodes can read/write the volume concurrently
+  resources:
+    requests:
+      storage: 5Gi  # Request 5Gi of storage (this is more symbolic for EFS)
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-efs-2
+spec:
+  storageClassName: efs-storage  # Reference to the EFS StorageClass
+  accessModes:
+    - ReadWriteMany  # Multiple nodes can read/write the volume concurrently
+  resources:
+    requests:
+      storage: 8Gi  # Request 8Gi of storage (this is more symbolic for EFS)
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-efs
+spec:
+  replicas: 2  # Create two replicas
+  selector:
+    matchLabels:
+      app: nginx-efs
+  template:
+    metadata:
+      labels:
+        app: nginx-efs
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2  # Nginx container image
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: efs-storage-1
+          mountPath: /usr/share/nginx/html  # Mount path inside the container for pvc-efs-1
+        - name: efs-storage-2
+          mountPath: /var/log/nginx  # Mount path inside the container for pvc-efs-2
+      volumes:
+      - name: efs-storage-1
+        persistentVolumeClaim:
+          claimName: pvc-efs-1  # Bind pvc-efs-1 to efs-storage-1
+      - name: efs-storage-2
+        persistentVolumeClaim:
+          claimName: pvc-efs-2  # Bind pvc-efs-2 to efs-storage-2

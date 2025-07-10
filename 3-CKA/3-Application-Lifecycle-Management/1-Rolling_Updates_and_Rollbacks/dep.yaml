@@ -1,0 +1,35 @@
+apiVersion: apps/v1  # The API version for the Deployment resource
+kind: Deployment     # Specifies that this is a Deployment resource
+metadata:
+  name: my-deployment  # The name of the Deployment
+spec:
+  replicas: 3  # Number of pod replicas to create
+  selector:
+    matchLabels:
+      app: my-app  # Selector to match the pods created by this Deployment
+  strategy:
+    type: RollingUpdate  # Deployment strategy type (can be RollingUpdate or Recreate)
+    rollingUpdate:
+      maxSurge: 1        # The maximum number of pods that can be created over the desired number of pods (in percentage or absolute number)
+      maxUnavailable: 1  # The maximum number of pods that can be unavailable during the update (in percentage or absolute number)
+  template:
+    metadata:
+      labels:
+        app: my-app  # Labels applied to the pods created by this Deployment
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app                # Node label key that the pod should match
+                operator: In            # Operator specifying that the key's value should be in the provided list
+                values:
+                - web                   # The value of the node label that the pod should match
+      containers:
+      - name: my-container  # The name of the container inside the pod
+        image: nginx  # The Docker image to use for the container
+        resources:
+          requests:
+            memory: "256Mi"  # Memory request for the container (256 MiB)
+            cpu: "500m"      # CPU request for the container (500 millicores

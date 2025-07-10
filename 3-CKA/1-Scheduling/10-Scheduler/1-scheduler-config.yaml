@@ -1,0 +1,8 @@
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+clientConnection:
+  kubeconfig: /etc/kubernetes/scheduler-kubeconfig.yaml
+leaderElection:
+  leaderElect: false # only one can be a leader in an HA configuration, leader works while other acts as a standby
+profiles:
+  - schedulerName: custom-scheduler

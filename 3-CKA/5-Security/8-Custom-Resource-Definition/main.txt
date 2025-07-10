@@ -1,0 +1,10 @@
+When you create a deployment, pods are created and not just only that, replica set maintains the number of pods,
+the deployment controller is responsible for this.
+
+Custom resource definition allows us to create our own objects, even allows the object to create another object, just
+like the way deployment creates pods.
+
+Customer controller are written in programming language, it monitors the crd object and make changes and you can deploy
+this controller as a pod or deployments in the k8s cluster!
+
+Operator framework is just deploying both crd and controller code at the same time.

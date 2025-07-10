@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      resources:  # this is the resource request
+        requests:
+          cpu: "2"
+          memory: "4Gi"

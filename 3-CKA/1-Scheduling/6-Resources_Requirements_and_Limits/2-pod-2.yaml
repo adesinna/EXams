@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod
+spec:
+  containers:
+  - name: sample-container
+    image: your-container-image:latest
+    resources:
+      requests: # what it needs to schedule
+        memory: "1Gi"
+        cpu: "1"
+      limits:  # what it cannot use
+        memory: "2Gi"
+        cpu: "2"

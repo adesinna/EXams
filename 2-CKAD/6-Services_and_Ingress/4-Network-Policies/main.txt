@@ -1,0 +1,7 @@
+In Kubernetes, ingress and egress refer to the flow of network traffic
+to and from the cluster and between its components. These concepts are
+critical for controlling and managing traffic in a Kubernetes cluster.
+By default, all  pods allows all pods for both ingress and egress rules.
+
+Network policies are objects, they are like security groups.
+

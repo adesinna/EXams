@@ -1,0 +1,18 @@
+When pods are created they go through some phase before it schedules on a node
+
+Scheduling Queue
+    This queues the pod based on the priority set on the pods
+
+Filtering
+    This filter the possible nodes the node can be scheduled on
+
+Scoring
+    This scores the possible nodes and grades them based on resources free space
+
+Binding
+    This would bind the pod with the node that as the best score
+
+They are plugins for each of the stages, they can be attached to the
+extension points, pre and post
+
+You can use on yaml file to configure profiles, to use diffe

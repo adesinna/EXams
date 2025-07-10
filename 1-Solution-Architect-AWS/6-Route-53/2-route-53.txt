@@ -1,0 +1,42 @@
+Amazon Route 53 is a highly scalable and reliable Domain Name System (DNS)
+web service provided by AWS. It connects user requests to internet applications
+running in AWS or on-premises infrastructure.
+The name "Route 53" comes from the fact that DNS typically uses port 53.
+
+
+Alias record are only mapped to resources in aws
+
+CNAME can map non-root domain to a root domain
+
+
+Routing Policies
+
+Simple Routing Policy:
+    Route traffic to a single resource
+
+Weighted Routing Policies
+
+    You can decide the percentage of request should go to a particular
+    instance based on their weight.
+
+    It can do health checks too
+
+Latency Based:
+    This route it to the closest instance
+
+
+Failover Policy:
+    There would be a standy ec2 instance, if the health of the primary fails
+
+Geolocation:
+    Routes traffic based on user location and
+    bias (optional adjustment to favor one location over another).
+    A resource in us-east-1 and another in us-west-2, apply a 20% bias to us-east-1 to increase traffic routed there.
+
+
+IP based Routing:
+    Based on CIDR should route to an instance
+
+Multivalue Answer Routing Policy:
+Provides multiple health-checked IP addresses for DNS queries.
+Useful for applications that need client-side load balancing

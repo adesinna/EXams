@@ -1,0 +1,75 @@
+API groups in Kubernetes are a way to organize and version resources in the Kubernetes API.
+They help manage the evolution of the Kubernetes API over time while ensuring backward compatibility.
+API groups allow Kubernetes to expose multiple APIs for different functionalities
+and enable developers to add their own APIs or extensions.
+
+
+
+1. Core API Group:
+
+    Also called the "legacy" API group.
+    Does not have a group name; resources in this group are directly accessible under paths like /api/v1.
+    Includes basic Kubernetes objects such as:
+       Pods
+       Services
+       ConfigMaps
+       PersistentVolumes
+       Secrets
+       Namespaces
+
+2. Named API Groups
+ Extend the Kubernetes API to include more functionality or specific features.
+ Follow the format <groupName>/<version>, e.g., apps/v1.
+ Examples of named API groups:
+   apps (e.g., Deployments, DaemonSets, StatefulSets)
+   batch (e.g., Jobs, CronJobs)
+   autoscaling (e.g., HorizontalPodAutoscaler)
+   policy (e.g., PodSecurityPolicy)
+   rbac.authorization.k8s.io (e.g., Role, RoleBinding, ClusterRole, ClusterRoleBinding)
+   networking.k8s.io (e.g., NetworkPolicy, Ingress)
+   apiextensions.k8s.io (e.g., CustomResourceDefinition)
+
+
+3. Custom API Groups
+ Developers can define their own APIs using Custom Resource Definitions (CRDs).
+ CRDs allow the creation of custom resources, which can be grouped under custom API groups.
+
+
+
+Versioning
+API groups support multiple versions (e.g., v1, v1beta1, v2alpha1) to enable gradual evolution:
+ Alpha: Experimental and may change or be removed. Not recommended for production.
+ Beta: More stable but may still have breaking changes. Suitable for testing.
+ Stable (v1): Productionready and backwardcompatible.
+
+Discovery
+API groups are discoverable via the Kubernetes API server. You can list the available API groups by running:
+bash
+kubectl apiversions
+
+
+Or to get detailed API resources within a specific group:
+bash
+kubectl apiresources
+
+
+ Practical Use
+ When working with Kubernetes objects, you specify the group and version explicitly in manifests, such as:
+yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exampledeployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+       name: examplecontainer
+        image: nginx
+
+
+API groups provide structure, modularity, and scalability for the Kubernetes API, accommodating both core and extensible resources.

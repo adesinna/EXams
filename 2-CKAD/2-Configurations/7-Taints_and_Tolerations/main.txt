@@ -1,0 +1,46 @@
+This is a pod to node relationship, the ones it should accept or the one it should reject.
+
+Taints are set on nodes while toleration are set on pods, if a taint  is tolerant of pod, it allows it to be created there.
+
+
+Imagine you have a big playground (your Kubernetes cluster) with several play areas (nodes) for different
+activities (running containers). Now, let's talk about "taints" and how they work:
+
+Taints are like special signs that you put on a specific play area (node) to say, "Hey, only certain kids (pods)
+are allowed to play here!" These signs have two parts: a "key" and a "value." For example, you could have a sign that says "Color=Red."
+
+Next, we have "taint effects," which describe how the sign affects the playground. There are three types:
+
+1. "NoSchedule" sign means that only kids with a matching sign in their hand (tolerations) are allowed to play
+on that specific area (node). Other kids without the right sign can't join the fun there.
+
+2. "PreferNoSchedule" sign is a bit more relaxed. It suggests that kids without the matching sign should try
+to play somewhere else, but if they really need to play there, they can.
+
+3. "NoExecute" sign is strict. It not only stops new kids without the right sign from playing but even kicks
+out any kids already playing there without the right sign!
+
+So, when you "apply a taint" to a node, it's like putting one of these special signs on that play area.
+You specify the "key" and "value" of the sign, and you pick one of the "taint effects" to say how strict you want it to be.
+
+
+
+
+# NoSchedule means not in go away
+# PreferNoSchedule means go away, but if needed you can come
+# NoExecute means I will always check inside to see who entered wrongly and kick them out
+
+To be a taint on a node
+
+
+
+kubectl taint nodes node_name key=value:taint-effect
+
+kubectl taint nodes <node-name> app=web:NoSchedule
+
+kubectl describe node node01 | grep -i Taint # to see the taint on a node
+
+kubectl taint nodes node_name key=value:taint-effect- # notice the -, it is to remove the taint
+
+Taints on nodes does not guarantee that the pod with its toleration will be placed on it,
+because it can try another nodes before trying it.

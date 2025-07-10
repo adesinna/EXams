@@ -1,0 +1,18 @@
+A security context is a set of security-related configurations that apply to a pod or container. These settings control:
+
+Linux user/group IDs
+
+Privilege escalation
+
+Read-only file systems
+
+SELinux, AppArmor, seccomp profiles
+
+Capabilities (like NET_ADMIN, SYS_TIME)
+
+
+You can set security contexts:
+
+    At the Pod level: applies to all containers in the pod.
+
+    At the Container level: overrides pod-level settings for that container.

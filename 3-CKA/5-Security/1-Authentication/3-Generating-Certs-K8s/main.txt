@@ -1,0 +1,42 @@
+We are going to use openssl
+
+Step 1:
+    We generate the keys and certs for the CA
+
+    openssl genrsa -out ca.key 2048 # private key
+
+    openssl req -new -key ca.key -subj "/CN=KUBERNETES-CA" -out ca.csr # certificate sigining request
+
+    openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt # self signed by the CA
+
+
+Step 2:
+    We generate the keys and certs for the clients (i.e admin)
+
+    openssl genrsa -out admin.key 2048 # generate keys
+
+    openssl req -new -key admin.key -subj "/CN=kube-admin/O=system:masters" -out admin.csr # certificate signing request
+
+    openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt # this is the signed cert using the CA private key
+
+
+Note:
+    O=system:masters, if this group is present in the certificate signing request, then it means it give the user
+    admin privileges.
+
+Same goes for the server, including api-server
+
+The things that need to be passed
+
+--client-ca-file=/var/lib/kubernetes/ca.pem # all components needs this
+
+--tls-cert-file=/var/lib/kubernetes/apiserver.crt
+
+---tls-private-key=/var/lib/kubernetes/apiserver.key
+
+
+--etcd-ca-file=/var/lib/kubernetes/ca.pem # all components needs this
+
+--etcd-cert-file=/var/lib/kubernetes/apiserver.crt
+
+---etcd-private-key=/var/lib/kubernetes/apiserver.key

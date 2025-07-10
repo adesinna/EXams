@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecr-app-deployment
+  labels:
+    app: ecr-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecr-app
+  template:
+    metadata:
+      labels:
+        app: ecr-app
+    spec:
+      containers:
+      - name: app
+        image: <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<repo-name>:<tag>
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred

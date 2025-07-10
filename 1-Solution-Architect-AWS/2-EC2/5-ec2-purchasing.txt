@@ -1,0 +1,123 @@
+1. On-Demand Instances
+
+Description:
+    Pay for compute capacity by the hour or second (depending on the instance type) with no upfront commitment.
+
+Use Cases:
+    Short-term workloads or unpredictable traffic.
+    Development, testing, and proof-of-concept applications.
+    Applications with spiky or unpredictable usage patterns.
+
+Billing:
+    Hourly or per-second basis (minimum of 60 seconds for Linux and Windows instances).
+
+
+2. Reserved Instances (RI)
+
+Description:
+    Commit to a 1- or 3-year term to receive a significant discount (up to 75%) compared to On-Demand prices.
+
+Types of RIs:
+   - Standard Reserved Instances:
+        Offer the highest discount for predictable workloads.
+        Cannot be changed after purchase.
+   - Convertible Reserved Instances:
+        Allow you to change instance types or families within the same region.
+        Offer slightly lower discounts compared to Standard RIs.
+
+Use Cases:
+    Steady-state or predictable workloads.
+    Long-term projects with consistent compute requirements.
+Billing:
+Payment options:
+    All Upfront (AU): Full payment at the start for maximum discount.
+    Partial Upfront (PU): Partial payment upfront with reduced hourly costs.
+    No Upfront (NU): Pay monthly, slightly higher cost.
+
+3. Savings Plans
+
+Description:
+    Flexible pricing model that provides savings for compute usage (e.g., EC2, Fargate, Lambda) based on a commitment
+    to a consistent usage amount ($/hour) for 1 or 3 years.
+
+Types:
+    Compute Savings Plans:
+        Applies to all instance types, sizes, regions, and operating systems.
+    EC2 Instance Savings Plans:
+        Applies to specific instance families within a region.
+        Less flexible but offers greater discounts.
+Use Cases:
+    For predictable workloads where flexibility in instance usage is required.
+    If you want savings across multiple AWS services.
+
+
+4. Spot Instances
+Description:
+    Purchase unused EC2 capacity at discounts of up to 90% compared to On-Demand prices.
+
+Caveats:
+    Instances can be interrupted by AWS with a 2-minute warning when capacity is needed.
+    Not suitable for workloads requiring continuous availability.
+
+Use Cases:
+    Fault-tolerant and flexible workloads like big data processing, batch jobs, CI/CD pipelines, and stateless applications.
+    Training machine learning models or rendering.
+
+Billing:
+    Pay for the duration the instance is running, based on the Spot price, which fluctuates.
+
+
+5. Dedicated Hosts
+Description:
+    Physical servers dedicated to your use, giving you visibility and control over the placement of instances.
+
+Use Cases:
+    Regulatory requirements or software licensing (e.g., Bring Your Own License for Microsoft or Oracle).
+    Enterprise environments requiring physical server isolation.
+
+Billing:
+    Pay per host (hourly, daily, or monthly).
+
+
+6. Dedicated Instances
+Description:
+    Instances running on dedicated hardware but without the management capabilities of Dedicated Hosts.
+
+Use Cases:
+    Workloads requiring server isolation for compliance or licensing.
+
+Billing:
+    Per instance with additional charges for dedicated hardware.
+
+7. Capacity Reservations
+Description:
+    Reserve compute capacity in a specific Availability Zone for predictable workloads,
+    ensuring instance availability when needed.
+
+Use Cases:
+    Applications requiring guaranteed capacity in a specific AZ.
+    Disaster recovery planning.
+
+Billing:
+    Billed at On-Demand rates; can combine with Reserved Instances or Savings Plans for discounts.
+
+
+ORSSDDC
+
+On demand: I can come and book room at any time
+
+Reserved: I want to book room for a long time, give me discount
+
+Saving Plans: I want to spend certain amount per day for a period and stay in any room type
+
+Spot Instance: Empty rooms I have to bid for, and I can get kicked out any time
+
+Dedicated Host: I will keep this building for you
+
+Dedicated Instance: I will keep these rooms for you
+
+Capacity Reservation: Book a room, even if I no stay
+
+
+
+Spot fleet = spot instances + on demand

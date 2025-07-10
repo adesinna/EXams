@@ -1,0 +1,22 @@
+We can pull image easily if it is public but when it is private we need to do more steps
+
+Method1: Manually Create Docker Registry Secret
+
+    Authenticate to ECR and Get Docker Credentials
+
+    aws ecr get-login-password --region <region> | docker login \
+      --username AWS \
+      --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
+
+
+    kubectl create secret docker-registry regcred \           #not generic docker-registry
+      --docker-server=<aws_account_id>.dkr.ecr.<region>.amazonaws.com \
+      --docker-username=AWS \
+      --docker-password=$(aws ecr get-login-password --region <region>) \
+      --docker-email=you@example.com
+
+    Then use image pull secrets
+
+Method2: Use Service Account
+
+Create a service account that allows you to pull images

@@ -1,0 +1,7 @@
+| Feature                | Readiness Probe                          | Liveness Probe                          |
+|------------------------|------------------------------------------|-----------------------------------------|
+| Purpose               | Checks if the container is ready to serve traffic.      | Checks if the container is still running and healthy.
+| Action on Failure    | Removes the container from the Service's load balancer.   | Restarts the container.
+| Use Case             | Prevents traffic from being sent to an unready container. | Recovers from application crashes or hangs.
+| Impact                | No restart; container remains running.                   | Container is restarted.
+

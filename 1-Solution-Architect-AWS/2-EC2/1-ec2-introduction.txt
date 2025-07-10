@@ -1,0 +1,74 @@
+This is an on demand virtual machine that you get from AWS, this is IAAS
+
+You can pick the kind of machine you want, and run user script on launch,
+there is options to set security group rules.
+
+Instance State
+
+In AWS, the lifecycle actions for instances relate primarily to EC2 instances.
+Here's what each action means specifically in the context of AWS:
+
+
+ 1. Stop (EC2 Instance)
+ What it does:
+   Shuts down the instance, effectively stopping the operating system and powering off the instance.
+   The instance's root volume and attached EBS volumes are retained, and data on them is preserved.
+   The instance is no longer charged for compute (EC2 hours), but storage costs for the EBS volumes still apply.
+ Behavior:
+   The public IP address (unless an Elastic IP is used) is released and may change when the instance is restarted.
+   Data in instance store volumes (ephemeral storage) is lost.
+
+
+ 2. Start (EC2 Instance)
+ What it does:
+   Powers on a previously stopped instance.
+   The instance boots up from its attached root volume, and any data on EBS volumes is retained.
+ Behavior:
+   A new public IP address is assigned (unless using an Elastic IP).
+   Charges for compute usage (EC2 hours) resume once the instance is running.
+
+
+ 3. Reboot
+ What it does:
+   Performs a soft reboot, restarting the operating system while the instance remains in the "running" state.
+   Equivalent to running the `reboot` command from within the instance.
+ Behavior:
+   The instance retains its public and private IP addresses.
+   EBS volumes remain attached, and no data is lost.
+   Minimal downtime compared to stopping and starting an instance.
+
+
+ 4. Hibernate
+ What it does:
+   Pauses the instance and saves the contents of its memory (RAM) to the root EBS volume.
+   The instance state is preserved, including the application state, data in memory, and private/public IP addresses.
+ Behavior:
+   When restarted, the instance resumes from where it left off.
+   Supported only for specific instance types and OS configurations.
+   Requires enough space on the root volume to store memory data.
+ Charges:
+   Storage charges for EBS apply, but no compute charges are incurred while hibernated.
+
+
+ 5. Terminate
+ What it does:
+   Permanently deletes the instance.
+   By default, the root volume is deleted, but additional attached volumes can be preserved if configured.
+   The instance store (ephemeral storage) data is lost.
+ Use case:
+   For cleaning up resources that are no longer needed to avoid incurring charges.
+ Behavior:
+   The instance cannot be restarted after termination.
+   Associated resources like Elastic IP addresses are disassociated.
+
+
+Comparison of Costs
+| Action   | Compute Costs | Storage Costs (EBS) | Public IP Retention | Application State |
+
+| Stop     | No            | Yes                 | No                  | Lost              |
+| Start    | Yes           | Yes                 | No (unless Elastic IP)| N/A              |
+| Reboot   | Yes           | Yes                 | Yes                 | Retained          |
+| Hibernate| No            | Yes                 | Yes                 | Retained          |
+| Terminate| No            | Optional (if kept)  | No                  | Lost              |
+
+Understanding these actions allows you to optimize costs and manage the lifecycle of your EC2 instances effectively.

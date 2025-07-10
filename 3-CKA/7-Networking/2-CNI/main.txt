@@ -1,0 +1,22 @@
+CNI stands for Container Network Interface. It's a specification and a set of libraries used to configure network
+interfaces in Linux containers, primarily in Kubernetes and other container orchestration platforms.
+
+
+ip addr
+ip route
+netstat -nlp
+
+CNI in Kubernetes
+Container Runtime must create network namespace
+Identify network on the container must attach to
+Container runtime to invoke network plugin(bridge) when container is added or deleted
+
+
+/opt/cni/bin # this is where the cni plugins are
+
+/etc/cni/net.d  # this where the configuration is
+
+CNI WEAVE:
+    How does put each of its agent on every node and can communicate to other nodes. They intercept the package sent
+    from each pod and effectively route it to the appropriate pod. That is the weave peers are deployed as a daemon set.
+

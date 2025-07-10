@@ -1,0 +1,30 @@
+
+If you are referring to using a domain name in the context of an ingress, here’s how you can integrate it:
+
+1. Setting Up an Ingress for a Domain Name
+When configuring an NGINX Ingress Controller, you typically define an ingress resource that routes traffic to your services based on domain names or hostnames. Here’s how you can create an ingress resource that routes traffic to a specific service using a domain name.
+
+2. Example Ingress Manifest
+Suppose you want to route traffic for example.com to a service named my-service on port 80. You can define an ingress resource like this:
+
+yaml
+Copy code
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  namespace: ingress-nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /  # anything behind would be to the service
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80

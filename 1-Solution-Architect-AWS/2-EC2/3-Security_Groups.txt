@@ -1,0 +1,12 @@
+These are rules on the traffic that is coming in and going out of your instance,
+typically we have
+- Outbound rules
+- Inbound rules
+- Ports
+- Protocol
+
+An instance can have multiple security group and a security group can have multiple instances,
+these firewall rules are locked down to a vpc/region.
+
+If you define a rule that allows a particular port for the security group X, all the
+instance in the security group X enjoys that privilege.

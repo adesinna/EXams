@@ -1,0 +1,5 @@
+These are used for resources that are not bound to namespaces, like PV, Nodes, Clusters, use kubectl api-resource you
+can know whether a resource is cluster or namespace.
+
+We use cluster role and cluster role binding for objects like this. If you use cluster role and rolebinding for an object
+that is namespace, then the effects would be for every namespace in the cluster.

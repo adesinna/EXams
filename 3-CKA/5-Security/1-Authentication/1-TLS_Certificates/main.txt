@@ -1,0 +1,77 @@
+A certificate is used to guarantee trust between two parties in a transaction.
+
+Asymmetric Encryption -ssh
+
+When you generate your private and public key
+
+ssh-keygen
+
+Now you can export the public key, to the server, but only the person that have access to the private key can access
+the server.
+
+
+So when a client makes an https request to the server it gets a public key from the server, then the client encrypts the
+public key with its own private key and send it back to the server, now the server can use its own private key to decrypt
+the public key information set.
+
+
+Now how will the server or client trust each other, this is where certificates authorities comes in. Symantec is a
+popular. You would send a certificate signing request to the CA, the CA verifies you and issues the certificate. In to
+make sure the CA authentic, the public keys of all the CAs is in your browsers.
+
+Generally private keys have extension keys in they and public do not have.
+
+
+A certificate is used to guarantee trust between two parties during a transaction.
+
+Understanding of TLS certificates:
+Suppose a user is trying to access a server and this connection is not secured, the user types in his password and username,
+the hacker is able to sniff this.
+
+Now the user, decides to encrypt the message, although the hacker is unable to understand the message, so does the server
+since both of them do not know how to decrypt it.
+
+Next the user decide to add the key with the message, however the hacker also get the decrypting key too. Which in turn exposes the
+message to the hacker. This is called Symmetric Encryption
+
+
+Now the user decides to use two keys to encrypt the data, namely a private and public key. Only the private key can be use to unlock the public,
+the public can be shared with others however, only those with private key can access the message unlocked in the public one, since the public key
+is used only of encryption.
+
+
+User generates private and public keys for ssh purposes
+
+ssh-keygen
+
+The public key will be sent to the server, so you can use your private key.
+
+In case of this bank user, the server generates  both public and private key
+
+openssl genrsa -out my-bank.key 1024 # this generates private key
+
+openssl rsa -in my-bank.key -pubout > mybank.pem # this generates public key
+
+Now when the user first connects to the server, its gets a public key in its browser, so does
+the hacker. The user browser encrypts message using the public key provided by the server using something called asymmetry key.
+This asymmetry and the public key is sent back, even if the hacker gets this key, he does not have the private key to decrypt the
+message since it is only the private key that can do that, and it did not leave the server.
+
+To be honest, after doing all this, the user is still not secure. If the hacker can find a way for you to route the traffic to his own
+secured server. That is why certificates is needed to be sure that the public key sent is from who they said it is.
+
+Your browser will be the one to verify the certificate, using the Certificate Authority
+
+The server also needs a certificate from the user to be sure that the client is who he says he is.
+
+All these are called PKI (public key infrastructure)
+
+key is always in private key extension. While public key do not.
+
+The certificates that servers use for verification are called server certificates
+
+The certificates that CA use for verification are called root certificates
+
+The certificates that clients use for verification are called client certificates
+
+Since the client, and CA uses the same method.

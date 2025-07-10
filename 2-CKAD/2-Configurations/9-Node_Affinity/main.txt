@@ -1,0 +1,33 @@
+1. requiredDuringSchedulingIgnoredDuringExecution  #RDSIGS
+This ensures that the pod is scheduled only on nodes that match the required labels at the time of scheduling.
+However, once the pod is running, any changes to the node's labels won't affect it.
+
+Key points:
+Labels must exist on the node during scheduling.
+If the node's labels change while the pod is running, it will keep running.
+
+Example:
+A pod can only run on nodes labeled zone=us-east-1.
+If the label is removed after the pod starts, the pod remains on the node.
+
+
+2. preferredDuringSchedulingIgnoredDuringExecution
+This defines a preference, not a hard requirement. The scheduler will try to place the pod on a node
+with the specified labels if possible. If no such node exists, it will place the pod anywhere.
+
+Key points:
+Labels don’t have to exist for the pod to be scheduled.
+Like requiredDuringSchedulingIgnoredDuringExecution, the pod will keep running even if the node's labels change.
+Example:
+A pod prefers nodes labeled zone=us-west-1. If no such nodes are available, the pod can run on any other node.
+
+3. requiredDuringSchedulingRequiredDuringExecution
+This enforces that the labels on the node must match both during scheduling and while the pod is running.
+If the node's labels change and no longer match, the pod will be evicted.
+
+Key points:
+Labels must exist during scheduling and must remain present during execution.
+If the labels change, the pod is kicked out of the node.
+Example:
+A pod must run on a node labeled disk=ssd. If the label changes to disk=hdd,
+the pod will be evicted and rescheduled.

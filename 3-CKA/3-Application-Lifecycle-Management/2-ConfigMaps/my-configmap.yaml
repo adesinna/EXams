@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap
+  namespace: my-namespace
+data:
+  file-path: "/etc/config/myfile.json"
+  database-url: "mysql://username:password@db-host:3306/mydb"
+  app-config.json: |
+    {
+      "debug": true,
+      "logLevel": "info",
+      "maxConnections": 100
+    }

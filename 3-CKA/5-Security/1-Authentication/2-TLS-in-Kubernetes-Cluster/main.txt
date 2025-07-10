@@ -1,0 +1,62 @@
+In  the cluster we have 3 types of certificates, we have
+-Root Certificates:
+    These are the CAs certificates
+
+- Server Certificates
+
+- Client Certificates
+
+
+The certificates that servers use for verification are called server certificates
+
+The certificates that CA use for verification are called root certificates
+
+The certificates that clients use for verification are called client certificates
+
+
+
+All communications in the cluster must be secured.
+
+Server Certificates for Servers:
+
+- Kube-api server:
+   Since everyone tries to access it, it acts as a major server for many components.
+
+    apiserver.crt & apiserver.key
+
+- ETCD server:
+    Since the kubeapi server needs to access it for data information, it acts as a server for it.
+
+    ectdserver.crt & ectdserver.key
+
+- Kubelet server
+    Since it needs to receive data from the kube-api, to carry out operations on the worker nodes.
+
+
+Clients
+
+ClientName           Keys             Server
+
+admin via kubectl   admin.crt admin.key    Kube-api
+
+kube-scheduler   scheduler.crt scheduler.key    Kube-api
+
+controller-manager controller-manager.crt controller-manager.key   Kube-api
+
+kube-proxy   kube-proxy.crt kube-proxy.key    Kube-api
+
+Kube-api     apiserver.crt apiserver.key    ETCD
+
+Kube-api     apiserver.crt apiserver.key    Kubelet
+
+
+
+
+
+
+
+
+
+
+
+

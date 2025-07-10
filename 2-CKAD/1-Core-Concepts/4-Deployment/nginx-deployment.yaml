@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3  # makes sure that 3 replicas are always running
+  selector:
+    matchLabels:
+      app: nginx # pod it should select
+  template:
+    metadata:
+      labels:
+        app: nginx # Labels applied to the pods
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 3004
+

@@ -1,0 +1,13 @@
+Step 1
+    kubectl label nodes <node-name> app=web
+
+
+
+Step 2
+
+    kubectl taint nodes <node-name> app=web:NoSchedule
+
+
+
+Step3
+    deploy them with node affinity

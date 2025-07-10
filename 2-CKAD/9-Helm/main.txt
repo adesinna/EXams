@@ -1,0 +1,17 @@
+Helm looks at all the objects as a group
+
+helm install app-name
+
+helm upgrade app-name
+
+helm rollback app-name
+
+helm uninstall app-name
+
+
+Helm templates are the yaml files and values is the file variable file
+
+helmchart = templates + values
+
+helm install release-name chartname
+

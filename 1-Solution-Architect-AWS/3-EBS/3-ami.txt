@@ -1,0 +1,77 @@
+Amazon Machine Image are use to customize an Ec2 instance, just like docker
+images.
+
+AMI are built for specific region and can be copied across regions too
+
+We have public and private, you get AMI in the AWS marketplace
+
+
+When working with AWS, both Amazon Machine Images (AMIs) and Launch Templates are used in the process of launching and managing EC2 instances, but they serve different purposes and are not interchangeable. Here's a breakdown:
+
+
+
+Amazon Machine Image (AMI)
+
+Definition:
+- An AMI is a pre-configured virtual machine image that contains the information needed to launch an instance,
+ including the operating system, application server, and applications.
+
+Purpose:
+- Provides the base software stack for your instances.
+
+Key Features:
+1. Operating System: Includes the OS (Linux, Windows, etc.) and its configuration.
+2. Installed Software: Can include pre-installed applications or dependencies.
+3. Customization: Allows you to create custom AMIs for your specific needs.
+4. Region-specific: AMIs are tied to a specific region but can be copied to other regions.
+
+Use Case:
+- Launching multiple instances with the same configuration (e.g., web servers or application backends).
+
+
+
+Launch Template
+
+Definition:
+- A launch template is a configuration template for launching EC2 instances.
+    It specifies details about the instance, such as the AMI to use, instance type,
+    key pair, security groups, tags, and other settings.
+
+Purpose:
+- Provides a more detailed and reusable way to define instance configurations.
+
+Key Features:
+1. Advanced Configuration: Includes parameters like block device mappings, IAM roles, and instance metadata options.
+2. Reusability: Allows you to reuse configurations for Auto Scaling Groups or Spot Fleets.
+3. Versioning: Supports version control, enabling you to maintain different versions of the same template.
+4. Parameter Flexibility: Can reference multiple AMIs or override parameters dynamically during instance launch.
+
+Use Case:
+- Automating and managing instance configurations at scale, especially with services like Auto Scaling, EC2 Fleet, or Spot Fleet.
+
+---
+
+ Comparison
+
+| Feature           | AMI                          | Launch Template                          |
+|-------------------|------------------------------|------------------------------------------|
+| Scope             | OS and application setup     | Complete instance configuration          |
+| Customization     | Custom software and settings | Combines AMI with instance-level details |
+| Versioning        | No                           | Yes                                      |
+| Reusability       | Limited                      | Highly reusable across services          |
+| Primary Use       | Base for instance creation   | Automating and scaling instance launches |
+
+---
+
+ When to Use Which
+
+1. Use AMIs when:
+   - You need a consistent, reusable image with pre-installed software.
+   - You want to quickly spin up instances with the same software stack.
+
+2. Use Launch Templates when:
+   - You need detailed instance configurations, including hardware settings and tags.
+   - You’re working with Auto Scaling Groups or managing large fleets of instances.
+   - You need versioning to keep track of different configurations.
+
+In most workflows, AMIs are a component of Launch Templates, as the AMI ID is specified within the launch template.
