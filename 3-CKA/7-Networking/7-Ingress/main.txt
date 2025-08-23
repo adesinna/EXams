@@ -1,0 +1,9 @@
+An Ingress in Kubernetes is an API object that defines HTTP/HTTPS routing rules to expose Services externally.
+It requires an Ingress Controller (e.g., NGINX, Traefik, cloud-specific) that actually processes these rules.
+The IngressClass specifies which controller should handle a given Ingress.
+Example: ingressClassName: nginx ensures only the NGINX Ingress Controller enforces that resource.
+Ingress supports host-based and path-based routing, SSL/TLS termination, rewrites, and redirects.
+Unlike Services (Layer 4), Ingress works at Layer 7, enabling smarter traffic management.
+In short: Ingress = rules, Ingress Controller = executor, IngressClass = mapping between them.
+
+

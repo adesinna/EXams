@@ -1,0 +1,25 @@
+The Gateway API in Kubernetes is a modern, flexible framework for managing how external traffic enters a cluster.
+Developed by the Kubernetes SIG-Network group, it addresses the limitations of the traditional Ingress API by providing
+a more expressive, extensible, and controller-agnostic approach to traffic management.
+Unlike Ingress, which primarily supports HTTP and HTTPS traffic, the Gateway API accommodates multiple protocols,
+including TCP and TLS, making it suitable for a wide range of applications.
+
+At its core, the Gateway API separates the responsibilities of gateway operators and application teams.
+The GatewayClass resource defines the type of gateway and the controller that will manage it,
+while the Gateway resource represents an actual instance with one or more listeners on specific ports and protocols.
+Traffic routing is handled by route resources such as HTTPRoute, TCPRoute, and TLSRoute,
+which specify how incoming requests should be forwarded to backend services.
+This separation of concerns improves security, observability, and operational flexibility,
+allowing network administrators to manage gateways without interfering with application-level routing.
+
+Compared to Ingress, the Gateway API provides significant advantages. It supports multi-listener gateways,
+allowing a single gateway to handle different ports and protocols simultaneously.
+Routing rules are more advanced, enabling path, host, header, and method matching, as well as weighted traffic splitting.
+It also supports multi-namespace routing, making it easier for large organizations with multiple
+teams to manage traffic independently. Additionally, being controller-agnostic, it can integrate seamlessly
+with service meshes and cloud provider solutions, providing a unified and scalable networking model.
+
+In summary, the Gateway API represents the next-generation standard for Kubernetes ingress traffic.
+Its flexibility, extensibility, and advanced routing capabilities make it far superior to the traditional Ingress API,
+particularly in large-scale, multi-team, or multi-protocol environments. By decoupling gateway management
+from application routing, it offers a robust, scalable solution for modern Kubernetes deployments.

@@ -1,0 +1,57 @@
+AWS offers several types of load balancers under its Elastic Load Balancing (ELB) service,
+each designed to handle different types of traffic and workloads.
+
+
+ 1. Application Load Balancer (ALB)
+    Layer: Operates at Layer 7 (Application Layer) of the OSI model.
+    Use Case:
+      Ideal for load balancing HTTP and HTTPS traffic.
+      It supports advanced routing mechanisms, such as host based routing,
+      path based routing, and routing based on HTTP headers.
+
+    Features:
+      Supports WebSocket and HTTP/S.
+      Provides contentbased routing, making it suitable for microservices and containerized applications.
+      Integration with AWS services like AWS WAF (Web Application Firewall) for security.
+      Target groups can include EC2 instances, IP addresses, and Lambda functions.
+
+ 2. Network Load Balancer (NLB)
+        Layer: Operates at Layer 4 (Transport Layer).
+        Use Case:
+            Designed for load balancing TCP, UDP, and TLS traffic where performance is critical.
+            It's ideal for applications that require extreme performance and low latency.
+
+        Features:
+          Capable of handling millions of requests per second with ultra-low latencies.
+          Provides static IP addresses per availability zone and supports Elastic IP addresses.
+          Preserves the source IP of the client, which is crucial for certain applications.
+
+ 3. Classic Load Balancer (CLB)
+    Layer: Can operate at both Layer 4 (Transport Layer) and Layer 7 (Application Layer),
+            but with limited features compared to ALB and NLB.
+
+    Use Case:
+            Traditional load balancer suitable for simple load balancing of HTTP/HTTPS or TCP traffic.
+            It is now considered legacy and is generally recommended only for existing applications already using it.
+
+    Features:
+      Supports both SSL termination and sticky sessions.
+      Limited to basic routing, making it less versatile than ALB or NLB.
+
+ 4. Gateway Load Balancer (GWLB)
+    Layer: Operates at Layer 3 (Network Layer).
+    Use Case: Ideal for deploying, scaling, and managing virtual appliances, such as firewalls,
+              intrusion detection systems, and deep packet inspection systems.
+    Features:
+      Integrates with third party network virtual appliances.
+      Allows inspection of traffic at scale without needing to update the client or service configurations.
+      Provides a single entry and exit point for traffic and seamlessly redirects traffic to the virtual appliances.
+
+ Key Differences and Considerations:
+     ALB is optimal for web applications needing advanced routing features, such as path based or host based routing.
+     NLB is the goto choice for high performance applications requiring low latency and the ability to handle volatile traffic patterns.
+     CLB is suitable for older applications but is generally being phased out in favor of ALB and NLB.
+     GWLB is specialized for integrating virtual appliances and offers unique networking capabilities.
+
+Each load balancer type supports health checks, automatic scaling, and integration with other AWS services,
+but your choice should depend on your application's specific needs and the type of traffic you expect to handle.

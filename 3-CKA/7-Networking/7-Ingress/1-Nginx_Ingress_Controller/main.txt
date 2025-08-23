@@ -1,0 +1,72 @@
+# We are going to use helm to install
+
+
+1. install helm
+
+    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+    helm version
+
+2. Choose the version nginx controller that is compatible with your k8s
+
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm search repo ingress-nginx --versions
+
+3. Install ingress-nginx controller
+    # envs
+    CHART_VERSION="4.11.2"
+    APP_VERSION="1.11.2"
+
+    mkdir ./manifest
+
+    # paste everything below
+
+    helm template ingress-nginx ingress-nginx \
+    --repo https://kubernetes.github.io/ingress-nginx \
+    --version ${CHART_VERSION} \
+    --namespace ingress-nginx \
+    > ./manifest/nginx-ingress.${APP_VERSION}.yaml
+
+    helm template ingress-nginx ingress-nginx \
+    --repo https://kubernetes.github.io/ingress-nginx \
+    --version 4.11.2 \
+    --namespace ingress-nginx \
+    > ./manifest/nginx-ingress.1.11.2.yaml
+
+
+    # create this namespace, use this exact name
+
+    kubectl create namespace ingress-nginx
+
+    # deploy the file in ./manifest
+
+    kubectl apply -f ./manifest
+
+
+4. Test the port
+    kubectl get svc -n ingress-nginx
+
+    #this command is for minikube
+    kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 31482:80 --address 0.0.0.0 &
+
+    # for normal nodes
+    kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 80
+
+5. Create a domain and let it point to the load balancer that ingress has created
+
+6. Install cert-manager
+    kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.yaml
+
+7. Create cluster issuer
+    kubectl apply -f cluster-issuer.yaml
+
+8. create the ingress
+
+    kubectl get ing
+
+9. See the certs and secrets
+    kubectl get certs
+
+    kubectl get secrets
+
+10. Delete the lb before terraform destroy and the lb

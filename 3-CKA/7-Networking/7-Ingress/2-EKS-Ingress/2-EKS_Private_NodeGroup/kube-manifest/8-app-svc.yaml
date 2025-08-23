@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: usermgmt-restapp-service
+  labels:
+    app: usermgmt-restapp
+  namespace: kube-test
+#   annotations:
+#     service.beta.kubernetes.io/aws-load-balancer-type: nlb    # To create Network Load Balancer,
+spec:
+  type: LoadBalancer  # this would create an clb
+  selector:
+    app: usermgmt-restapp
+  ports:
+    - port: 80 # svc port, ensure the lb is using 80
+      targetPort: 8095

@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: polomapp-route
+  namespace: default
+  labels:
+    app: polomapp-route
+spec:
+  parentRefs:
+    - name: polomapp-gateway
+  rules:
+    - matches:
+        - path:
+            type: Prefix
+            value: /
+      backendRefs:
+        - name: main-service
+          port: 80
+    - matches:
+        - path:
+            type: Prefix
+            value: /customer
+      backendRefs:
+        - name: customer-service
+          port: 80
+    - matches:
+        - path:
+            type: Prefix
+            value: /admin
+      backendRefs:
+        - name: admin-service
+          port: 80
+    - matches:
+        - path:
+            type: Prefix
+            value: /rider
+      backendRefs:
+        - name: rider-service
+          port: 80

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ns-resource-quota
+  namespace: kube-test
+spec:
+  hard:
+    requests.cpu: "2" # the total cpu request that can be used in the namespace
+    requests.memory: 2Gi # the total memory request that can be used in the namespace
+    limits.cpu: "4" # the total cpu limit that can be used in the namespace
+    limits.memory: 4Gi # the total memory limit that can be used in the namespace
