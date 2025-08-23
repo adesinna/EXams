@@ -13,7 +13,8 @@ Pod Status
     This is when it is working as it should
 
 Readiness is that the application is ready to be used, sometimes the pod might be ready but the
-application isnt. Thats why we use readiness probe. This is just like a test to show that the container is truly ready for incoming network
+application isnt. Thats why we use readiness probe.
+This is just like a test to show that the container is truly ready for incoming network
 
 Now we have to tie the readiness of the pod to the application readiness.
 

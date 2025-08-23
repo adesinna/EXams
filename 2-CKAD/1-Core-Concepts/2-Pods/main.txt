@@ -27,7 +27,7 @@ Debugging Pods:
 
 kubectl logs name_of_pod # to see the logs in the pod container
 
-kubectl logs-f name_of_pod # would see the log dynamically
+kubectl logs -f name_of_pod # would see the log dynamically
 
 
 

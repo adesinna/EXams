@@ -39,3 +39,9 @@ When we try to reach www.polom.com from within your organization or computer, it
 try to resolve it, if it can then it goes to the root DNS server and forwards it to the DNS server serving .com and forwards
 to the dns server serving polom, then it is resolved to the ip serving the subdomain. This could be cache for it not to take
 this same trip again.
+
+Record Type
+
+A record means  mappping host name to ipv4
+AAAA record means mapping hostname to ipv6
+CNAME records means mapping hostname to another name

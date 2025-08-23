@@ -35,8 +35,10 @@ and a backend port which is the port of the pods. It knows the appropriate backe
 using labels.
 
 
-kubectl get svc
+So whenever pods are created, the kubelet invokes the CNI plugins assigns  ip address to the pod, however the kube-proxy
+creates a forwarding rule, that whenever you access a service via the ip and pod, forward the traffic to the list of
+pods attached to the service.
+Make usre ip range of ip does not overlay with the ip for service when configuring it in the kube-proxy
 
-kubectl describe svc name_of_svc
-
-kubectl delete svc name_of_svc
+kubectl logs agent_cni -n kube-system # to see the range of ip for pods
+ To see ip for the service its in the kube  api server manifest

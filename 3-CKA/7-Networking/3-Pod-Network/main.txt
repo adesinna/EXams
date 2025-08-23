@@ -3,7 +3,7 @@ configure networking at the pod layer.
 
 K8s doesnt come with a in built solution for pod networking but there is a layout in CNI
 - Every pod should have an ip
-- Every pod should be able to communicate with each other both on the same node and on the other nodes.
+- Every pod should be able to communicate with each other both on the same node and on the other nodes without a NAT.
 
 
 /opt/cni/bin  # contains all the cni plugins

@@ -1,4 +1,4 @@
-Suppose there is no scheduler to schedule pods on the node, then you would need to manually
+zSuppose there is no scheduler to schedule pods on the node, then you would need to manually
 schedule it on the node, this is done by adding the field nodeName to the pod definition file.
 When a pod is created the nodename can not just be added, there is always a binding object that
 would be created for it to map the pod to the node.

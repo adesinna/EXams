@@ -19,3 +19,7 @@ would create this static pods, but would mirror it for the kubeapi-server in rea
 Use case:
 Since you cannot delete static pods using kubeapi-server, you can use it to deploy the control
 plane itself as pods on nodes.
+
+Systemd services: kubelet, container runtime
+Static Pods: control-plane components (API server, etcd, controller-manager, scheduler)
+DaemonSet Pods: kube-proxy, CoreDNS, CNI plugins

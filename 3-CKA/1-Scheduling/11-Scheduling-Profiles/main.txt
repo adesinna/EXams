@@ -15,4 +15,5 @@ Binding
 They are plugins for each of the stages, they can be attached to the
 extension points, pre and post
 
-You can use on yaml file to configure profiles, to use diffe
+You can use on yaml file to configure profiles, to use different scheduler by using the scheduler name.
+

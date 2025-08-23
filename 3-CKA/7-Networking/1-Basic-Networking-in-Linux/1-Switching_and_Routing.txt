@@ -1,8 +1,8 @@
 Suppose two linux systems with network card eth0 on each, how does the two systems communicate with each other,
 they are connected to a switch. Suppose computer A with ip 192.168.1.10/24 and B with ip 192.168.1.11/24 are in a
-network 192.168.1.0. They can communicate with each other if they are linked to a switch.
+network 192.168.1.0(This is the network range of the switch). They can communicate with each other if they are linked to a switch.
 
-ip link # to the network face card
+ip link # to get the network face card
 
 ip addr add 192.168.1.10/24 dev eth0  # for computer A
 
@@ -11,10 +11,11 @@ ip addr add 192.168.1.11/24 dev eth0 # for computer B
 Now both computer A and B can communicate with each other within the same network.
 
 Although both system can communicate with each other, they can only do so in the same network, suppose they need to
-communicate with another system C and D, in another network ?
+communicate with another system C and D, in another network with its own switch ?
 
 This is where router comes in, a router allows two computers in two different network communicates, with each other,
 the router would be connected to the two separate network so it get two ips assigned, one from each of the network.
+Thats is router would have its ip address on Network A and its unique IP address on Network Bll
 
 Now the router is just another device on the network, to  make sure it knows where to forward this traffic to, it needs
 a gateway.
@@ -24,16 +25,9 @@ A router is a network device that:
 
 Connects two or more different IP networks
 
-Routes packets between them based on IP addresses
-
-Maintains a routing table
-
-May include additional features like DHCP, firewall, NAT, etc.
-
-Example:
-Connects your home LAN (192.168.1.0/24) to your ISP’s network
-
-Knows how to forward traffic to the internet or between local subnets
+Now we have A and B in network 1, like wise C and D in network 2. To connect the two networks together we need the
+router which would have its own ip address on each switch. Now how does a system A in Network one communicates with
+system B in Network 2. We need to configure a gateway, which acts as door
 
 What is a Gateway?
 A gateway is a more general concept:
@@ -42,6 +36,18 @@ It is any device that acts as an access point to another network
 
 In IP networking, the term default gateway usually refers to the IP address of the router that devices send packets
 to when the destination is outside their own subnet.
+
+
+Router:
+Think of the router like the mail sorter inside your house. When someone in your family (your computer, phone, tablet)
+sends a letter (data), the router looks at it and says, “Oh, this belongs to Mom’s room (the laptop)” or “This goes to your game console.”
+It only works inside your house, making sure the letters go to the right family member.
+
+Gateway:
+Now, imagine your house has a front door, The gateway is that door! It’s the place where letters from inside your house
+go out to the big wide world 🌍 (the internet), and where letters from the world come into your house.
+Without the gateway, your family could only send letters to each other, not to friends outside.
+
 
 
 

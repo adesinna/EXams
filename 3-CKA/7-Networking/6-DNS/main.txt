@@ -1,0 +1,26 @@
+DNS in Kubernetes Cluster
+
+Kubernetes deploys its own DNS cluster by default, whenever a service is created the kube DNS creates a record and
+match its to the ip of the svc.
+
+The kube DNS register the svc as:
+
+Hostname Namespace Type   Root              IP
+
+web       default   svc   cluster.local    10.107.37.188
+
+
+So now the FQDN is
+
+web.default.svc.cluster.local
+
+The kube DNS register the pods as:
+
+Hostname          Namespace  Type       Root              IP
+
+10-244-2-5       default      pod   cluster.local    10.244.2.5
+
+
+CORE DNS is the server, that is deployed in the cluster, it is deployed as deployment.
+
+The core DNS is would be passed in the kubelet and also adds the ip and it names in the server

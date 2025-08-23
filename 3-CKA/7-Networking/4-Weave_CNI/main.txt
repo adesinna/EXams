@@ -1,0 +1,53 @@
+How does the weave solution works ?
+
+What is Weave Net?
+
+Weave Net is a CNI plugin for Kubernetes.
+     It creates a virtual network mesh between all nodes in the cluster.
+     Every Pod gets a unique cluster-wide IP, and Pods can talk to each other without NAT, as Kubernetes requires.
+
+1. Mesh Network of Nodes
+
+    Each Kubernetes Node runs a Weave Net agent (`weave` container).
+    These agents form a mesh overlay network over the physical network. # this agent transport the packet to each pod
+
+2. Overlay Tunnels
+
+    Pods communicate across Nodes using VXLAN tunnels encapsulated in UDP packets.
+    Traffic between Pods on the same Node doesn’t go through tunnels — it stays local.
+
+3. IP Address Management
+
+    Weave assigns IPs to Pods from a configurable CIDR (default: `10.32.0.0/12`).
+    No central controller — IPs are distributed and managed in a decentralized way.
+
+4. Encryption (Optional)
+
+    Weave can encrypt traffic between Nodes for cluster security.
+
+
+
+ Flat, NAT-free network → all Pods can reach each other.
+ Automatic topology discovery → nodes auto-detect and connect.
+ Network resilience → if one path fails, traffic is rerouted.
+ Encryption with a simple flag.
+ Network Policies support (so you can restrict Pod-to-Pod traffic).
+ Simple setup compared to some other CNIs.
+
+
+
+
+This deploys the Weave Net DaemonSet on every Node.
+Then Pods on any Node can get cluster-wide IPs and communicate.
+
+
+1. Pod A (`10.32.0.5`) on Node1 talks to Pod B (`10.32.1.8`) on Node2.
+2. Pod A sends traffic to B’s IP.
+3. Weave Net on Node1 encapsulates the packet in VXLAN.
+4. The packet goes across the physical network to Node2.
+5. Weave Net on Node2 decapsulates and delivers to Pod B.
+
+To Pod A and B, it feels like direct communication — no NAT, no special routing needed.
+
+
+

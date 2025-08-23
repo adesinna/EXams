@@ -1,0 +1,16 @@
+During the early days of computers,because computer was super expensive, the university would buy one single computer and
+give terminals or console devices to department where they would login.
+
+1. Local Login
+
+This is to login locally
+
+2. Remote Login
+
+To connect to a remote server, the is an ssh daemon running on the server, you use your ssh client your own machine
+to connect.
+
+ssh username@ip_add
+
+
+

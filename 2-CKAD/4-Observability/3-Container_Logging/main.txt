@@ -1,3 +1,5 @@
 This will show you the event of what is happening in the containers.
 
-kubectl logs -f pod_name / (container_name) # -f will stream the log in real time
+kubectl logs -f pod_name
+
+kubectl logs -f pod_name -c container_name

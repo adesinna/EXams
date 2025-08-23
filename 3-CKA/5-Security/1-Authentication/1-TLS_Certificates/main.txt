@@ -16,7 +16,7 @@ the public key information set.
 
 
 Now how will the server or client trust each other, this is where certificates authorities comes in. Symantec is a
-popular. You would send a certificate signing request to the CA, the CA verifies you and issues the certificate. In to
+popular one. You would send a certificate signing request to the CA, the CA verifies you and issues the certificate. In to
 make sure the CA authentic, the public keys of all the CAs is in your browsers.
 
 Generally private keys have extension keys in they and public do not have.

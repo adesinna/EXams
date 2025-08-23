@@ -21,14 +21,14 @@ We have some admission controller like that comes default
     Reject request to namespace that does not exist
 
 
-sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml and do not apply tghe file since it is a static pod
+sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml and do not apply the file since it is a static pod
 
 Check for admission controller
 
 You add and disable addmission control using the enable and disable flag
 
 
-kube-apiserver -h | grep -i enable-admission-plugins
+kube-apiserver -h | grep -i enable-admission-plugins    # to see the list of admission controllers enabled by default
 
 
 Mutating Admission Controller
@@ -45,7 +45,7 @@ Validating Admission Controller
 They are admission controller that can do both, however, it goes through mutating
 first before validating
 
-n Kubernetes, MutatingAdmissionWebhook and ValidatingAdmissionWebhook are two types of admission webhooks used to
+In Kubernetes, MutatingAdmissionWebhook and ValidatingAdmissionWebhook are two types of admission webhooks used to
 intercept requests to the Kubernetes API server before the object is persisted to etcd.
 They allow custom logic to be executed during API request processing.
 

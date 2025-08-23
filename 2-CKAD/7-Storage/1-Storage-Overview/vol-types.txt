@@ -45,7 +45,9 @@ In Kubernetes, storage volumes can be categorized into three main types based on
         applications requiring high-performance storage.
 
    - CSI (Container Storage Interface):
-        CSI volumes allow integration with external storage providers that offer block storage. They are a versatile way to access block storage in Kubernetes.
+        CSI volumes allow integration with external storage providers that offer block storage.
+        They are a versatile way to access block storage in Kubernetes.
+
 
 3. Object Volumes:
     While Kubernetes primarily focuses on block and file storage, you can also work with object storage in pods

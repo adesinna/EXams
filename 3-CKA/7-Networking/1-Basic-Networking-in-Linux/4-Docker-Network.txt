@@ -16,4 +16,6 @@ docker run --network bridge nginx
 
 The default network
 
-Every container get a namespace when created and are linked to the bridge network
+Every container get a namespace when created and are linked to the bridge network by default.
+With port publishing you can access the container from the host.
+

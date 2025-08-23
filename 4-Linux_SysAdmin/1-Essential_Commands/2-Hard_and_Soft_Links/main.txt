@@ -1,0 +1,11 @@
+stat /path/item
+
+This would let you see the inode of the item, this inode is where it is stored in the disk.
+
+The hard link allows the file or item to be stored once and the other one points to it.
+
+ln path/to/file /path/of/link # when you delete the file, the link still point to it in memory until everyone deletes their link
+
+While soft link is a file that points to a path.
+
+ln -s path/to/file /path/of/link # so when you delete the file the link does work

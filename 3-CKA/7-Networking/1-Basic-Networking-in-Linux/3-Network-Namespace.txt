@@ -1,3 +1,21 @@
-Network namespaces are used to isolate container in a host. When a container is created, you create a namespace that would
-have its own network interface. To connect this network namespace to a virtual switch. The local host can act has a
-route and gateway for the namspaces
+Network Namespaces:
+    These are should by containers to implement network isolation. As we know docker uses Namespaces to isolate containers
+    and cgroups to control their resources.
+
+    When you create a container its creates its own network namspace, as far as the container is concerned, it only sees
+    the process within its own namespace. Although the underline host can access all the network namespace on it.
+
+    See the host a hotel, it can enter any room in the hotel, however each guest only have his or her own key to their
+    assigned to it. It is unware of the other rooms, only the host is aware of these rooms.
+
+
+
+When a container is created it creates its own network namespace, it has its own route table. Just like the host have its
+own interfaces. Now suppose you create two network namespaces, they can communicate by a virtual link, veth.
+
+You can create a virtual switch instead, this is better than link. Since if they are numerous namespaces and connect
+all the namespace to the switch. You can also add the host to this virtual switch via veth since its interface on the
+host.
+
+Now we can now use a router and localhost as gateway through the ip address asigned to the host on the virtual switch.
+And with port forwarding you can reach the on the
