@@ -1,0 +1,49 @@
+Before we say what Kustomize is, let us consider this unique problem I have with my polomapp, we wrote the manifest
+file for the dev env, and it contains specifications for the envs, however I need to rewrite for staging and prod, by
+changing values at different level, example is the lb in the ingress, gateway apis and stuffs.
+
+This is the problem Kustomize came to solve.
+
+How does Kustomize work?
+
+There would be a base directory and overlay for each envs where you customize for each envs
+
+k8s/
+    base/
+        kustomization.yaml
+        nginx-dep.yaml
+        svc.yaml
+        redis.yaml
+
+    overlays/
+        dev/
+            kustomization.yaml
+            config.yaml
+        stg/
+            kustomization.yaml
+            config.yaml
+        prod/
+            kustomization.yaml
+            config.yaml
+
+
+kustomize build /k8s   # just shows what would happen
+
+
+kubectl apply -k k8s/
+
+kubectl delete -k k8s/
+
+
+
+k8s/
+    base/
+        dir1/
+        ...
+        dirN/
+In a case like this, put kustomization.yaml file and specific the resource, and list all the dir/ in the base
+kustomization
+
+
+Common Transformers:
+    What are common transformers, they

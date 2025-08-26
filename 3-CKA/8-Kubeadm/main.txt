@@ -1,0 +1,9 @@
+When designing a kubernetes cluster there are a lot of things to be considered, is it for productions, number of pods and
+so on. for highly available cluster, you can have two master nodes or more. The kube-apiservers would have a load balancer
+in front of them to distribute traffic. But the scheduler and controller would make one as leader elect, why the other
+would be standby. The ETCD should be high available, the leader writes to the workers, they the workers must write
+through the leader.
+
+The best way to deploy for own is by using kubeadm.
+
+We would follow the documentation for that.

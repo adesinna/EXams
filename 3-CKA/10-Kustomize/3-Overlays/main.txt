@@ -1,0 +1,50 @@
+So overlays imports the base and you use patches to changes things in the overlay.
+You can also add the path to the base folder ../../base
+You can also have new objects, and  put them in resources
+
+kubectl apply -k .
+
+# Create a directory to hold the base
+mkdir base
+# Create a base/deployment.yaml
+cat <<EOF > base/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+EOF
+
+# Create a base/service.yaml file
+cat <<EOF > base/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+EOF
+# Create a base/kustomization.yaml
+cat <<EOF > base/kustomization.yaml
+resources:
+- deployment.yaml
+- service.yaml
+EOF

@@ -1,0 +1,44 @@
+It is quite common to set cross-cutting fields for all Kubernetes resources in a project.
+
+Some use cases for setting cross-cutting fields:
+
+setting the same namespace for all resources
+adding the same name prefix or suffix
+adding the same set of labels
+adding the same set of annotations
+
+# Create a deployment.yaml
+cat <<EOF >./deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+EOF
+
+cat <<EOF >./kustomization.yaml
+namespace: my-namespace
+namePrefix: dev-
+nameSuffix: "-001"
+labels:
+  - pairs:
+      app: bingo
+    includeSelectors: true
+commonAnnotations:
+  oncallPager: 800-555-1212
+resources:
+- deployment.yaml
+EOF

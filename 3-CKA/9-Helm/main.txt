@@ -1,0 +1,32 @@
+Consider a simple wordpress manifest files, it could be complex and have so many moving paths. Suppose someone
+package them into one repo and gives you flexibility with variables. This is what helm does, it sees all the objects as
+a group.
+
+helm install wordpress
+
+helm upgrade wordpress  # after makes changes in the env
+
+helm rollback wordpress
+
+helm uninstall wordpress
+
+
+
+Helm templates are the yaml files and values is the file variable file
+
+helmchart = templates + values
+
+helm install release-name chartname   # chartname are like image and release_name are like containers
+
+How to use helm
+
+helm repo add chart_url
+
+helm install release-name chartname
+
+helm install release-name chartname  --set key=value
+
+helm install release-name chartname --values=values.yaml
+
+helm pull # to use locally
+

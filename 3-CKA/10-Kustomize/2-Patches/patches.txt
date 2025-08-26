@@ -1,0 +1,79 @@
+Patches can be used to apply different customizations to resources. Kustomize supports different patching mechanisms
+through StrategicMerge and Json6902 using the patches field. patches may be a file or an inline string, targeting a
+single or multiple resources.
+
+The patches field contains a list of patches applied in the order they are specified.
+ The patch target selects resources by group, version, kind, name, namespace, labelSelector and annotationSelector.
+
+Small patches that do one thing are recommended. For example, create one patch for increasing the deployment replica
+number and another patch for setting the memory limit. The target resource is matched using group, version, kind,
+and name fields from the patch file.
+
+
+# strategic patches
+
+# Create a deployment.yaml file
+cat <<EOF > deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+EOF
+
+# Create a patch increase_replicas.yaml
+cat <<EOF > increase_replicas.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  replicas: 3
+EOF
+
+# Create another patch set_memory.yaml
+cat <<EOF > set_memory.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  template:
+    spec:
+      containers:
+      - name: my-nginx
+        resources:
+          limits:
+            memory: 512Mi
+EOF
+
+cat <<EOF >./kustomization.yaml
+resources:
+- deployment.yaml
+patches:
+  - path: increase_replicas.yaml
+  - path: set_memory.yaml
+EOF
+
+# to delete dictionary
+
+value: null
+
+# to delete a list
+
+- $patch: delete
+   list_key: list_value

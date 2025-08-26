@@ -1,0 +1,23 @@
+Reusable configurations you can use, especially if its applies to a subset of the overlays
+
+/k8s
+    base/
+        kustomization.yaml
+        api-dep.yaml
+
+    components/
+        caching/
+            kustomization.yaml
+            redis-dep.yaml
+            dep-patch.yaml
+
+
+    overlays/
+        dev/
+        premium/
+        self-hosted/
+
+
+In premium
+components:
+    - ../../components/caching

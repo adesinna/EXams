@@ -1,0 +1,22 @@
+resources:
+  - nginx-svc.yaml
+  - nginx-dep.yaml
+
+commonLabels:
+  company: polom   # all resources deployed would have this label, this is a type
+
+
+# transfomers:
+# this are used across the board
+namespace: my-namespace
+namePrefix: dev-
+nameSuffix: "-001"
+labels:
+  - pairs:
+      app: bingo
+    includeSelectors: true  # for deployments
+commonAnnotations:
+  oncallPager: 800-555-1212
+
+# Patches
+# for specific objects we use patches
