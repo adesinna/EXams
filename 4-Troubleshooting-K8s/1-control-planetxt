@@ -1,0 +1,32 @@
+Problem:
+We tried to run kubectl get pods we have this error
+
+The connection to the server 172.31.35.156:6443 was refused - did you specific the right host or port
+
+Solution:
+1. We can first check the server ip we can connected to
+    hostname -i
+
+2. Is the server listening on port 6443
+
+    sudo ss -tulpns | grep 6443
+
+3.  See which static pods that is running
+
+    sudo critcl ps
+
+4. Go to the log of the static pods
+    /var/logs/pods
+
+5. We can also check
+    journalctl -u kubelet.service
+
+6. We can restart the kubelet
+
+
+
+If it is etcd or any other certificate, check the logs of these /var/logs/pods
+
+Same things happens to scheduler and controller manager pods
+
+Always check whether all the pods are running

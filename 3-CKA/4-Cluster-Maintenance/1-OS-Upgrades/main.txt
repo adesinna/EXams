@@ -6,8 +6,8 @@ cordoned (marked as unschedulable), when done you have to uncordon the node for 
 
 kubectl drain  node_name   # step1
 
-kubectl uncordon node_name # step 2
+kubectl uncordon node_name # step 2 # make it schedule-able
 
-If you hust want to make it unschedulable without evicting the pods
+If you just want to make it unschedulable without evicting the pods
 
 kubectl cordon node_name # just makes the node unschedulable

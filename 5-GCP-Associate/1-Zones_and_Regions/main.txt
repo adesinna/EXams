@@ -1,0 +1,6 @@
+Why do we need regions and zones, this helps for high availability and low latency, so even one of the region is down
+the other picks up, and you can serve user with the nearest data center to them
+
+It can also help with compliance reasons.  Zones are subsets of regions, each region have at least 3 zones, for fault
+tolerance and fail over,each zone have 2 or more data centers in them, they can connect links to they have very low
+latency.

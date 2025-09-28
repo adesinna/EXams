@@ -1,0 +1,84 @@
+Compute engines are virtual machines running on the cloud.
+It allows you to
+1. Create and manage the life cycle of your VM
+2. Load balancing and auto-scaling of your VM
+3. Attach storage and network storage to your VM
+4. Manage network connectivity and configurations of your VMS
+
+Compute Engine Machine  in GCP
+
+General Purpose:
+    This is great for general purpose workloads, like Web and application servers
+
+Memory Optimized:
+    This is great for memory intensive workloads, like In memory analytics applications or caching applications
+
+Computer Optimized:
+    This is great for compute intensive workloads like gaming applications
+
+Storage Optimized:
+    This is great for storage intensive workloads like Databases
+
+Network Optimized:
+    This is great for low latency work
+
+GPU:
+    This is great for parallel processing example is ML training workloads
+
+
+
+Image:
+    This is the OS and Software you want on your VM, it could be public or custom images
+
+Public and Private IP
+The internal ip is used within the subnet while external is for communicating over the internet.
+
+When you stop a vm and start it again, it gives it a new external ip.
+
+If you need to make sure to make the vm has a constant external ip, use static ip address, so when you restart
+you would still have your ip address.
+
+
+
+Custom Image:
+What it is:
+A snapshot of a disk (OS + installed software + configuration). like httpd installed already
+
+What it does:
+ Lets you create new VMs with the same OS and preinstalled software.
+
+What it doesn’t do:
+
+Doesn’t define machine type, network, tags, startup scripts, or metadata.
+
+Equivalent in AWS: AMI
+
+A GCP custom image captures whatever is on the VM disk.
+If you installed httpd before creating the image, it’s included; if not, it isn’t.
+
+GCP Instance Template
+
+What it is: A full blueprint for launching a VM.
+
+What it can define:
+
+    Boot disk (can use a custom image)
+
+    Machine type
+
+    Network/subnet
+
+    Tags
+
+    Service accounts
+
+    Metadata / startup scripts
+
+What it’s good for:
+
+Auto-scaling groups (managed instance groups)
+
+Quickly launching multiple identical VMs
+
+Equivalent in AWS: Launch Template
+

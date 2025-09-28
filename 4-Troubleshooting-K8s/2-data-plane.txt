@@ -1,0 +1,51 @@
+Kubeproxy manages the service, and routes traffic to the pod with iptables, it runs as  a daemon set and routes traffic
+to appropriate pods. If it is on different nodes, the cni plugins installed on each nodes helps with this.
+
+The core dns allows name resolution in the cluster
+
+Problem:
+Worker nodes saying not ready
+
+
+Solution
+Describe the nodes
+
+ssh into the worker node
+
+systemcl status kubelet
+
+journalctl -u kubelet
+
+# swap is a virtual,
+sudo swapoff /swapfile
+swapon --show
+
+rm -f /swappoff
+
+/etc/cni/net.d/  # where the plugins should be
+
+
+Problem:
+svc is not reachable
+
+
+Solution
+describe the svc
+
+create a test pod,
+
+kubectl run testpod --image=nginx --rm -it -- bash
+ping svc
+curl svc
+
+test the kube-proxy too
+
+
+Problem:
+curl svc_name
+
+solution
+nslookup svc
+check the core dns svc in kube-system
+describe it
+
