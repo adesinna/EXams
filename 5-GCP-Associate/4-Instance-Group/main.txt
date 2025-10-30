@@ -1,0 +1,16 @@
+Instance group can be manage or unmanage
+
+Unmanaged Instance Group:
+    This can be mixed vm types but it is not managed and can have different types
+
+
+Managed Instance Group:
+    Identical VMs are created using instance template, it can maintain the number, if one crashes, it get replaces.
+    Very similar to ASG. You can add a load balancer to distribute the traffic.
+    - You can maintain a certain number
+    - Detect failure using health check
+    - You can do this over a region and zonal depending on your use case
+
+
+You can configure health checks and updates such as canary and rolling updates.
+They are metric from Cloud Monitoring, to scale up or down when using Autoscaling, cpu or memory metric 

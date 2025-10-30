@@ -1,3 +1,5 @@
+Unlike transformers, patches provide a more surgical apporoach to targeting one or more K8s resources
+
 Patches can be used to apply different customizations to resources. Kustomize supports different patching mechanisms
 through StrategicMerge and Json6902 using the patches field. patches may be a file or an inline string, targeting a
 single or multiple resources.
@@ -77,3 +79,14 @@ value: null
 
 - $patch: delete
    list_key: list_value
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  template:
+    spec:
+      containers:
+      - $patch: delete    # this will delete the container nginx
+        name: my-nginx

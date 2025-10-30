@@ -48,3 +48,17 @@ resources:
 - deployment.yaml
 - service.yaml
 EOF
+
+mkdir dev
+cat <<EOF > dev/kustomization.yaml
+resources:
+- ../base
+namePrefix: dev-
+EOF
+
+mkdir prod
+cat <<EOF > prod/kustomization.yaml
+resources:
+- ../base
+namePrefix: prod-
+EOF

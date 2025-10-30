@@ -82,3 +82,19 @@ Quickly launching multiple identical VMs
 
 Equivalent in AWS: Launch Template
 
+You configure your custom machine types, using vCPU and Memory
+To edit the machine type, cpu and memory you have to stop the VM
+
+
+Best Practices Practices
+- Cost
+- latency
+- regulations
+- Specific Hardware
+- Multiple Zones and regions for HA
+
+
+For dedicated Hardware make sure you use sole tenant
+
+
+

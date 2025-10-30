@@ -45,5 +45,3 @@ In a case like this, put kustomization.yaml file and specific the resource, and 
 kustomization
 
 
-Common Transformers:
-    What are common transformers, they

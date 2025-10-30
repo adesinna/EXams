@@ -1,0 +1,8 @@
+CIS Benchmarks:
+    These are best practice security guidelines developed by the Center for Internet Security
+
+
+CIS Benchmarks for Kubernetes:
+Shared responsibility is divided depending on the kind of kubernetes you are using. Example is CIS benchmark for GKE, and
+you can use kube-bench for that.
+

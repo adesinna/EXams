@@ -1,0 +1,36 @@
+They are several ways you can optimize cost when using GCP VMs
+
+Sustained use discount:
+    This is a discount that is applied for running the VM for significant portion of the month
+
+Committed use discount:
+For workloads with predictable resource needs, you would need to commit to 1 or 3 years. You can get up to 70% discount
+on your vms. And this apply to GKE too. Commited to the base nodes and any extra created by auto scaling can be billed
+as standard.
+
+GCP Preemptible VM Recap:
+
+Cheap, short-lived VM (up to 24 hours), Can be terminated at any time if GCP needs the resources, ~70–80% cheaper than regular VMs
+Good for batch jobs, stateless workloads, or flexible compute.
+
+
+
+You can also create a budget to know when the cost passes a specific amount, it is a billing alerts.
+
+
+Live Migration and Availability Policy:
+How do you keep you vm running even if you need to make update.
+
+Live Migration:
+    The running instance is migrated to another host in the same zone, does not change any attributes of the VMs, it
+    is not supported for GPUs abd Preemptible instances.
+
+Availability Policy:
+    This is where you configure you migration
+
+    On host maintenance:
+        What should happend during periodic infrastructure maintenance
+        1. Migrate to another host
+        2. Terminate the instance
+
+        3. Restart instance if it is a non user intiated reasons
