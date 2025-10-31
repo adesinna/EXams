@@ -1,0 +1,36 @@
+App Engine allows you to just supply your code, without needing to bother about your infrastructure, this is called
+PAAS. The new version  of app engine is serverless like, since can scale down to zero when you are not using it.
+
+
+App Engine Environments
+1. Standard:
+    Application runs in language specific sandbox. py, GO, Java all have their own sandboxes
+
+
+2. Flexible:
+    Application instances run within docker containers
+
+In GCP, you only have 1 App Engine running in one project. However, one app different services with their version running
+their instances.
+
+App engine cloud have a service running 3 version. Each version can have 0 or more than that running.
+
+You can scale your app engine
+
+1. Automatic: This is based on a target cpu utilization
+2. Basic: It scales only when request is needed
+3. Manual: You manaually scale you app engine
+
+myapp/
+ ├─ main.py
+ ├─ requirements.txt
+ └─ app.yaml
+
+
+gcloud app deploy
+
+What flag is used to deploy a new version to an App Engine service without migrating a traffic to the new version?
+--no-promote
+
+What flag is used to migrate traffic gradually to the new version in App Engine together with --splits flag? (gcloud app services set-traffic)
+--migrate

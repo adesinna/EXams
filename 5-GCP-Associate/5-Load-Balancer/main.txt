@@ -1,0 +1,20 @@
+A load balancer allows you to distribute loads to your backend instances across zones and regions.
+It can be configured with health check, so it does not route traffic to the unhealthy ones.
+
+
+Anycast IP is a networking technique where the same IP address is assigned to multiple servers or routers,
+and traffic is automatically routed to the nearest or best-performing one based on routing metrics.
+
+Application layer 7 ---- HTTP, HTTPS, SMTP
+Transport layer 4 ----- TCP, TLS, UDP
+Network layer 3  ---- IP
+
+Types of load balancers
+
+1. HTTPS LB
+2. UDP LB
+3. TCP LB
+
+
+Proxy: Changes the details of the request
+Passthrough: It does not change the details of the request

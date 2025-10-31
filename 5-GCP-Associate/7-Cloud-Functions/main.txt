@@ -1,0 +1,59 @@
+Cloud Functions allows you to execute your codes when an event happens.
+You only pay for the amount of cpu, memory and request. It is fully serverless. It is time bound 1min to max 60min
+
+Cloud Functions is a serverless platform that runs single-purpose, event-driven functions in response to triggers,
+without managing servers or containers.
+
+Example
+
+HTTP-triggered Python function:
+
+def hello_world(request):
+    return "Hello from Cloud Functions!"
+
+
+Deploy:
+
+gcloud functions deploy hello_world \
+    --runtime python311 \
+    --trigger-http \
+    --allow-unauthenticated
+
+
+
+
+Cloud Functions automatically creates the endpoint, scales it, and runs your code — you don’t need to manage servers or containers.
+
+
+Flow of an HTTP-triggered Cloud Function
+
+You deploy the function:
+
+gcloud functions deploy hello_world \
+    --runtime python311 \
+    --trigger-http \
+    --allow-unauthenticated
+
+
+Google Cloud automatically gives it an HTTPS endpoint, like:
+
+https://REGION-PROJECT_ID.cloudfunctions.net/hello_world
+
+
+Client sends an HTTP request (GET/POST/etc.) to that URL.
+
+Google Cloud receives the request and routes it to your function.
+
+Cloud Functions runtime starts your function (if no instance is running, it will cold-start a container):
+
+def hello_world(request):
+    return "Hello from Cloud Functions!"
+
+
+Function executes your code and returns a response.
+
+Cloud Functions scales automatically:
+
+Handles multiple concurrent requests by spinning up more instances
+
+Scales down to 0 when idle

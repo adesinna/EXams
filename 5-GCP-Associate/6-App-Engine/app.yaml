@@ -1,0 +1,21 @@
+# Tell App Engine which Python version to use
+runtime: python311
+
+# Command to run the Django server (using gunicorn)
+# Replace "myproject" with your Django project folder name (where settings.py is)
+entrypoint: gunicorn -b :$PORT myproject.wsgi
+
+# Environment variables for Django
+env_variables:
+  # Points Django to your settings file
+  DJANGO_SETTINGS_MODULE: myproject.settings
+
+# Routing rules for App Engine
+handlers:
+  # Serve static files that Django collected (in /static after collectstatic)
+  - url: /static
+    static_dir: static/
+
+  # Any other request will be served by Django
+  - url: /.*
+    script: auto

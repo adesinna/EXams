@@ -1,0 +1,12 @@
+There are two ways data can be, either at rest like in hard disk or in transit like https request.
+
+If you store data without encrypting the data either at rest or in transit and you lose it, the data is not secured.
+
+Asymmetric encryption, is used where you encrypt with your public key and decrypt with  your private key.
+
+Cloud KMS:
+Cloud Key Management Service, it allows you to allow you to create keys to encrypt and decrypt.
+
+i. Google Management Key, here google manage your keys and no configuration is needed
+ii. Customer Management Key, here you manage your own key in Cloud KMS
+iii. Customer supplied key, here you supply your own key to Cloud KMS.

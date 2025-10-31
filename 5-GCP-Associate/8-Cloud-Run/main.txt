@@ -1,0 +1,40 @@
+loud Run is a fully-managed, serverless compute platform from Google Cloud that runs containerized applications and
+automatically handles infrastructure, scaling, and networking so you only focus on your code.
+
+
+Cloud Run lets you:
+
+Package your app into a Docker container
+
+Deploy it with one command
+
+Google automatically:
+
+Runs it
+
+Scales it up when there’s traffic
+
+Scales it down to zero when idle (saving money)
+
+Provides HTTPS, logging, security, and load balancing
+
+With Cloud Run, you just provide the container image (or source code) and Google handles all the Kubernetes-type
+components behind the scenes:
+
+✅ Deployment
+
+✅ Service
+
+✅ Autoscaling / replicas
+
+✅ Load balancing
+
+✅ Revision rollout & rollback
+
+✅ Networking & HTTPS
+
+✅ Health checks
+
+✅ Logs & metrics
+
+gcloud run deploy --image gcr.io/PROJECT/APP

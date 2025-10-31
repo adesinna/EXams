@@ -1,0 +1,28 @@
+We have 3 types of storage
+1. Block Storage
+2. File Storage
+3. Object Storage
+
+
+1. Block Storage:
+These are hard disk attached to your instances of the network. They store data in chunks of small block in memory, each
+block of data can be individually managed.
+There is typically a  1 to 1 relationship between VM and a block storage. However, if you have multiple VM and you want
+them to share a single block storage, they must be doing only reads operations to the block storage.
+It is very possible to connect multiple block storage to 1 single VM.
+
+Persistent Disk in GCP
+    i. Zonal and Regional
+    ii. Network Storage
+Local SSDs
+    i. Physically attached to your VM, and lasts the lifecycle of the VM.
+    ii. High IOPS and low latency
+
+
+
+
+2. File Storage:
+The data is organized in a folder and files like structure, it is best when a shared file is accessed by multiple systems
+These are used in legacy apps that uses file system. Multiple VMs doing a multiple reads and writes.
+
+In GCP it is called File Store
