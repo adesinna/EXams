@@ -26,3 +26,96 @@ The data is organized in a folder and files like structure, it is best when a sh
 These are used in legacy apps that uses file system. Multiple VMs doing a multiple reads and writes.
 
 In GCP it is called File Store
+
+
+Snapshots:
+This is like taking a backup of your persistent disk. It can be regional or multiregion. You can create a VM from a
+snapshot of a persistent disk.
+The same encryption of the disk is inherited by the snapshot.
+
+Image vs Machine Image
+
+| Feature        | Machine Image                        | Image (general)                          |
+| -------------- | ------------------------------------ | ---------------------------------------- |
+| Scope          | Full VM (OS + apps + config + disks) | OS only or container/app snapshot        |
+| Purpose        | Clone VM, backup VM                  | Deploy software / OS / container quickly |
+| Cloud examples | AWS AMI, GCP Machine Image           | Ubuntu OS image, Docker image            |
+| Includes OS?   | Yes                                  | Sometimes (OS image)                     |
+| Includes apps? | Usually yes                          | Maybe containerized apps                 |
+
+
+
+Object Storage:
+This is used to stored unstructured data in a bucket. The is a container for all the objects you need to create. Bucket
+names are unique globally. Medias, logs, files and etc can be storage in GCS
+
+We have different storage class based on how frequently you access the data.
+- Standard
+    This is when you access the data frequently
+
+- Nearline
+    This is when you access the data less than once a month
+
+- Coldline
+    This is when you access your data less than once in 3months
+
+- Archive
+    This is when you access you data once in a year
+
+GCS is serveless, you can add as many objects as you want.
+
+Access Control:
+You can have access storage at object level. That is fine grain permission  on specific object.
+
+Object have a key and value in the buckets. The key is the unique name (path) of the object in the bucket, while
+the value is the actual data stored — the file content.
+
+Key → "photos/2024/vacation/beach.png"
+Value → binary data of the image
+
+
+Uploading Files in GCS
+- Simple upload
+    This is when the file you upload is small, no metadata associated with the object
+
+- Multipart upload
+    Small files but metadata is associated with the object
+
+- Resumable upload:
+    Large files using http
+
+- Streaming transfer:
+    Upload unknown size of the object
+
+- Parallel composite uploads
+    Divides file into chunks and uploads
+
+
+Object Versioning:
+This prevents accidental deletion and gives history of the object. It is turned on at the bucket level.
+If you delete the live version which is the latest version, it becomes the noncurrent object version, if you delete
+the noncurrent object version, then the object is deleted.
+The older version are identified by object key + generation number.
+
+
+Object Life Cycle Management
+This is an automated way to move object into different storage classes depending on usage, the object moves from classes
+to classes based on the rules you specific.
+
+
+Cloud Storage with GCP KMS
+i. Server Side Encryption
+    a.This is the default, when you create a bucket, google automatically encrypts the data with their own manage key.
+      Which is the google managed key.
+    b. You have another options is to use customer managed key, the situation where the customer encrypts the data using
+        GCP KMS themselves. But you cloud storage service account must have access to the Customer Managed Keys
+
+ ii. Client Side Encryption
+    This is when you encrypt the data before you upload it.
+
+
+
+
+
+
+
