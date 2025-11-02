@@ -1,0 +1,103 @@
+Identity and Access Management is the authentication and authorization of identities in your GCP resources.
+
+Identities can be:
+- GCP Users
+- GCP Groups
+- Unauthenticated Users
+- Application running( they would need service account)
+
+Permission:
+    These are rules that either allows or deny access to a resources in GCP
+
+Roles:
+    Roles are set of permissions, they are just basically a collection of permission, unlike AWS, the roles cannot be
+    attached to a resources or users. They need policies.
+
+Policies:
+    When you create a role and need to bind it to an entity, you use policies in GCP. Policies bind roles to the entity,
+    so they can be used.
+
+
+ They are different types of roles in GCP.
+ - Basic Roles
+    Admin
+    Viewer
+    Editor
+
+ - Predefined roles
+   These are roles that are made up by GCP to meet most of your needs.
+
+ - Custom roles
+    These roles are created by you. It allows you to be more granular.
+
+
+The least privilege principle is used.
+
+gcloud projects list iam-policy-bindings
+
+gcloud iam roles list
+
+Service accounts are types of principals used by an application or non-human. The machine uses the service account and
+the policies binding to authorize and authenticate in GCP.
+
+Use Cases:
+1. We need a VM to talk to cloud storage. You need to create a service account, and binding the roles it would need using
+iam policies. Assign the service account to the VM.
+
+2. Onprem VM needs to access the Cloud storage.
+    You will need to create a service account key, and use this key to authenticate yourself in GCP, this service account
+    would have permissions so the onprem vm would be able to connect to GCS.
+
+✅ Recommended secure approach instead
+Use Workload Identity Federation (WIF)
+
+This avoids storing a long-lived service account key.
+
+For on-prem, you can federate identity using:
+
+OIDC identity provider (e.g., Active Directory, AzureAD, Okta, Ping, etc.)
+
+GCP will issue short-lived tokens — no static keys 🔐
+
+
+A project A needs to access storage in Project B
+A service account in Project A must be granted IAM permissions on the bucket in Project B.
+Once added to the bucket’s IAM policy, it can access storage in Project B.
+
+
+Access Control List of Storage
+This is who access your object storage, it can be bucket level or object level.
+IAM can be use for common permission to object, and acl used for customize access to individual objects.
+
+Presigned URL, allows you to access an object for a limited time to a user.
+
+Static Website Using bucket
+1. Create a bucket with the same name as the website name
+
+2. Copy the files into the bucket
+
+3. Add all members allUsers and grant storage object viewer
+Select allow public access
+
+
+gsutil mb gs://www.example.com/
+
+gsutil cp -r ./site/* gs://www.example.com
+
+gsutil iam ch allUsers:objectViewer gs://www.example.com
+
+Tell GCS which is the main page and error page:
+
+gsutil web set -m index.html -e 404.html gs://www.example.com
+
+Now view
+http://www.example.com.storage.googleapis.com
+
+
+You need to:
+
+Verify domain in Cloud Console → Domains
+
+Add a CNAME record:
+
+www.example.com → c.storage.googleapis.com

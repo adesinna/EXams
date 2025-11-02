@@ -1,0 +1,90 @@
+A database is a system used to store, organize, and manage data so that it can be easily accessed, updated, and retrieved.
+
+| Type              | Description                                             | Example Systems                       |
+| ----------------- | ------------------------------------------------------- | ------------------------------------- |
+| Relational DB     | Stores data in tables (rows & columns)                  | MySQL, PostgreSQL, SQL Server, Oracle |
+| NoSQL DB          | Stores data in flexible formats (JSON, key-value, etc.) | MongoDB, Redis, Cassandra             |
+| In-memory DB      | Stores data in RAM for speed                            | Redis, Memcached                      |
+| Graph DB          | Stores relationships between data                       | Neo4j, Amazon Neptune                 |
+
+
+Availability and Durability:
+This is how available your data is and durable is would be.
+To increase availability is having multiple secondary databases in different zones and regions. The durability can be
+done by taking snapshots of the databases at interval.
+
+Recovery Point Objective(RPO):
+This is the maximum acceptable period whereby a data can be loss
+
+Recovery Time Objective(RTO):
+This is the maximum period at which the db can have a downtime.
+
+
+When you have read intensive on the database, you have a multiple read replicas, so that the master does not do all the
+reads and writes.
+
+Consistency of data.
+Strong: It is when the data is replicated synchronously. It might be slow if you have multiple replicas.
+
+It is used if the data integrity is very important than availability. Example is bank data
+
+Eventually Consistency: The data is transfer asynchronously, there would be a little lag, but eventually all the replicas
+would be consistent.
+
+
+Database Categories:
+
+1. Relational Databases
+This is a database with predefined schema with tables and relationships.
+Since they are related, RDB are atomic, is either the change is succeed or doesnt.
+
+Examples of Online Transaction Processing OLTP
+i.Cloud SQL, is the  relational database in GCP. It supports a few TBs of data. It can come in MYSQL, POSTGRES, and SQL.
+It is great for regional application.
+
+ii.Cloud Spanner, it can scale unlimited, it is great for global applications.
+
+Examples of Online Analytics Processing(OLAP)
+When you need to analyze your data
+i. BigQuery: It is a relational database that allows you to perform data analysis.
+
+2. NOSQL DATABASE
+They are highly scalable, the schemas are flexible and most importantly and stores if json or documents.
+
+Firestore and BigTable are examples
+
+
+3. In memory Database
+They are faster than disk database. They are used for caching and session management.
+Example is cloud memory store
+
+
+
+Cloud SQL
+This is a fully managed relational database in GCP. It is regional service providing high availability.
+- It has automatic encryption
+- High availability via automatic backups and binary logging (Binary logging in Cloud SQL keeps the MySQL transaction logs
+    (specifically, MySQL binary logs), which record every change made to the database)
+- Read replicas can be created, but HA cannot be used as read replicas.
+
+Cloud Spanner
+This is a globally relational database, with very high availability. It is great for mission critical workloads
+
+BigQuery
+This is a relational database, that allows you query large datasets.
+- You can export to cloud storage with csv/json or compressed.
+- You can configure data to expire data
+- You can query external sources and query them
+
+
+
+
+Cloud Datastore and Firestore
+This is a NOSQL database offering by Google. Great for mobile and webapps and IOTs
+
+Cloud Bigtable
+This is NOSQL for petabyte data. It is designed for huge data
+
+MemoryStore
+This is an in memory, for caching. It is fully managed with HA.
+Redis and Memcache is support
