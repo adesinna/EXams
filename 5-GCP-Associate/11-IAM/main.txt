@@ -5,6 +5,8 @@ Identities can be:
 - GCP Groups
 - Unauthenticated Users
 - Application running( they would need service account)
+- Google workspace
+- Cloud Identity domain
 
 Permission:
     These are rules that either allows or deny access to a resources in GCP

@@ -1,0 +1,34 @@
+When you provision, you need to monitor and have insight to see how the applications are working.
+
+Cloud Monitoring
+We have cloud monitoring
+- Measures key metrics of the services
+- Creates visualization
+- Configure alerts
+
+You can use Cloud Monitoring Workspace to monitor one or more GCP projects and one or more AWS accounts. All these are
+done in a workspace.
+
+Cloud Logging
+This gets the logs from all the applications and service in real time, you use cloud logging.
+You can store, search, analyze and alert on massive volume.
+
+Cloud Logging Audit
+This is used to check who did what, when and where.
+This is used for security and postmortem too.
+
+
+Routing Logs
+You can use logs router to set logs into other services.
+
+Cloud logs -> Logs Router -> GCS/BIGQuery/Pubsub  || pubsub can  send it to 3rd party like splunk
+
+
+Cloud Trace
+Allows you trace request in a service, latency and average request in your microservice
+
+Cloud Debugger
+This allows you to debug issues in your environment.
+
+Cloud Profiler
+Allows you to identify performance bottlenecks in your source code.

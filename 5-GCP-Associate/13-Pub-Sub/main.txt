@@ -1,0 +1,6 @@
+Suppose you have an application that writes synchronously into a logging application, if the logging service goes down,
+it might affect your application. If there is high load, and there is a lot of logs coming in.
+This is when asynchronous communication works well.
+
+You can create a topic in pub-sub, the app publish to the topic, the calls are queued in the topics, and the logging
+service subscribes to them when ready.

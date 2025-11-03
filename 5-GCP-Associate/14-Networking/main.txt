@@ -1,0 +1,56 @@
+VPC is a virtual private cloud. This is the logical isolation of your resource network on the cloud.
+In GCP, VPC is a global resource, and you can create subnets in regions. Unlike AWS, if firewalls rules allows it, they
+can communicate privately since they use their fibre optics.
+
+Public Subnets:
+Resources can be exposed to the internet, and they are meant to be exposed. Example is application load balancer.
+
+Private Subnets:
+They can do not need to be exposed to the internet.
+
+
+Modes of VPC
+Auto mode:
+You get subnets in all region, when you create the vpc
+
+Custom mode:
+You will have to create your own subnets in the region you want
+
+
+
+When you enable private google access, then you VM's can connect to google's api via private subnets. To see the
+logs in the VPC you should enable FLOW LOGS
+
+
+CIDR:
+These are continuous IP addresses to make routing easier.
+ 172.9.0.0/X     # to know the number of ips.  2 ^ 32-X
+    0 8 16 24
+
+Firewall Rules:
+These are the security groups for your instances running. You can allow but ingress and egress rules. They are stateful,
+that is if ingress is allowed, then it implies egress is automatically allowed.
+They have priorities, 0 is the highest
+
+| Feature           | Shared VPC                        | VPC Peering                         |
+| ----------------- | --------------------------------- | ----------------------------------- |
+| Scope             | Same Org only                     | Cross-org possible                  |
+| Network ownership | Central in host project           | Separate per VPC                    |
+| Subnets           | Shared across projects            | Not shared                          |
+| Routing           | Automatic, full mesh              | Works but no transitive routing |
+| Use case          | Centralized enterprise networking | Connect distinct networks           |
+| Security mgmt     | Centralized                       | Independent VPCs                    |
+| Ease              | Requires IAM setup                | Simple connect                      |
+
+
+| Feature          | PSC                                  | Interconnect                        | Cloud VPN                    |
+| ---------------- | ------------------------------------ | ----------------------------------- | ---------------------------- |
+| Traffic Path     | Private Google network               | Private physical fiber (enterprise) | Public internet              |
+| Use Case         | Private service access (APIs / SaaS) | High-speed on-prem ⇄ GCP            | Secure tunnel on-prem ⇄ GCP  |
+| Performance      | High (internal Google network)       | Highest (up to 200 Gbps+)           | Medium (1.5 Gbps per tunnel) |
+| Latency          | Low                                  | Lowest                              | Variable, internet dependent |
+| Security         | Private IP access, no internet       | Private circuit                     | Encrypted over internet      |
+| Setup Complexity | Medium                               | High                                | Low                          |
+| Cost             | Pay per endpoint                     | $$$ (circuit + ports)               | $ (low)                      |
+| HA Option        | Yes                                  | Yes                                 | Yes                          |
+| Encryption       | Not required (private network)       | Not required (private network)      | Required (IPsec)             |

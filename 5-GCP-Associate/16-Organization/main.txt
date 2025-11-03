@@ -1,0 +1,83 @@
+There is a well-defined hierarchy in GCP
+
+Organization -> Folder -> Projects
+
+Resources are created in projects, folders can contain projects and even other folders. The organization can contain
+multiple folders.
+
+Google recommendation
+Isolate  projects for different envrionments and application
+app-1-dev -----> app-1-dev-project
+app-2-dev -----> app-2-dev-project
+app-1-prod -----> app-1-prod-project
+app-2-prod -----> app-2-prod-project
+
+You can grant fine grain permission based on the project, folder and even organization
+
+
+Billing Accounts:
+Billing accounts contains payment details, in fact every project is associated with a billing account. You can have multiple
+billing account in an organization.
+
+Cloud Billing Budget can be used to have threshold and alert us.
+This billing data can be set to cloud storage, pubsub or bigQuery to see insight.
+
+User Identity Management.
+When you have a organization, you either need cannot be adding users with roles one by one, use can use
+
+1. Google Workspace
+This is Google's cloud-based suite of productivity and business tools.
+It includes apps for communication, collaboration, storage, and managing users in an organization.
+
+Features:
+Company email (name@yourcompany.com)
+File sharing & team storage
+Real-time editing & collaboration
+Video meetings
+Admin controls for users and devices
+Single sign-on (SSO) to many SaaS apps
+
+In you can link Google workspace to your GCP and manage access.
+
+
+2. Your Organization Identity provider
+Federate GCP with external Identity provider with AD or Azure AD.
+
+Cloud Identity in GCP is a unified IAM for your users in GCP and you can link this with AD or Azure AD.
+
+User tries to access GCP
+
+GCP says: “I don’t check passwords — go ask Azure AD”
+
+User logs in at Azure AD login page
+
+Azure AD verifies identity (password, MFA, etc.)
+
+Azure AD sends a trusted token back to Google
+
+Google grants access to GCP based on IAM roles in Google
+
+Organization policies supersedes IAM roles
+
+
+Predefines roles
+
+1.Billings
+
+Billing Account Creator     ||  Permission to create billing account
+Billing Account Admin       ||  Permssion to manage, but cannot create
+Billing Account User        ||  Assign billing account to project
+Billing Account viewer      ||  Can only view billing account
+
+
+2. GKE
+Kubernetes Engine Admin: roles.container admin can do everything
+K8s Engine cluster admin: Provides access to cluster cannot create object
+K8s Engine developer: Can manage objects
+K8s engine viewer: get and list objects
+
+
+
+SSH login
+Metadata managed: manually create and configure inividual ssh
+OS login: Manage access without managing individual keys
