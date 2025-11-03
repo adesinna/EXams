@@ -6,11 +6,11 @@ Example, database and GKE
 This is the terraform for GCP, they use it for their IAC
 
 3. Cloud Marketplace
-This allows you to get commerical product that are not native to GCP, like Cassandra, Jenkins. See it like App store
+This allows you to get commercial product that are not native to GCP, like Cassandra, Jenkins. See it like App store
 for your phone.
 
 4. Cloud DNS
-This allows your to manage your domain, similar to route 53
+This allows you to manage your domain, similar to route 53
 
 5. Cloud Dataflow
 This is a pipeline for data in GCP, Itc can process the data and send it to the final destination.
