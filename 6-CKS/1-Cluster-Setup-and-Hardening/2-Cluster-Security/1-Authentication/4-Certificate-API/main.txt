@@ -1,0 +1,52 @@
+Suppose you are the admin to the cluster, you have your own key pair to access the cluster, now a new member joined
+your team, this jane doe would have to create their own key pairs, send a certificate signing request to you, approve
+it using your ca, and the admin will approve the certificate by using the certificate API.
+
+# Create a private key
+openssl genrsa -out myuser.key 3072
+
+# Change the common name "myuser" to the actual username that you want to use
+openssl req -new -key myuser.key -out myuser.csr -subj "/CN=myuser"
+
+# Encode
+cat myuser.csr | base64 | tr -d "\n"
+
+# apply the csr
+kubectl apply -f csr.yaml
+
+# Check the csr status and details of the csr
+kubectl get csr -o yaml
+
+kubectl describe csr myuser
+
+# To approve
+kubectl certificate approve myuser
+
+
+# To deny
+kubectl certificate deny myuser
+
+# To delete csr object
+ kubectl delete csr myuser
+
+#Export the issued certificate from the CertificateSigningRequest.
+
+kubectl get csr myuser -o jsonpath='{.status.certificate}'| base64 -d > myuser.crt
+
+Now if my user needs to get to the cluster, like get pods
+
+curl https://cluster-ip:6443/api/v1/pods \
+--key myuser.key
+--cert myuser.crt
+--cacert ca.crt
+
+kubectl get pods
+--server cluster-ip:6443
+--client-key myuser.key
+--client-certificate myuser.crt
+--certificate-authority ca.crt
+
+
+This is not so convenient way to get the cluster apis, this is where kube-config file comes in.
+
+

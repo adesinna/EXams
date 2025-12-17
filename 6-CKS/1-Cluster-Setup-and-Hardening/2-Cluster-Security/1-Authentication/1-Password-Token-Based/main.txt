@@ -1,0 +1,28 @@
+The authentication of the cluster is done by the kube-api server, although you cannot create users in Kubernetes,
+you can create service accounts, however Kubernetes rely on external services like LDAP, Cloud user etc, to manage
+user accounts.
+
+They are way you can authenticate into the kubernetes cluster
+
+i. Static Password Files
+ii. Static Token Files
+iii. Certificates
+iv. Identity Services
+
+i. Static Password Files:
+This is a csv file that contains user details and password, which is now passed to the kube-apiserver as an option
+
+password123, user1, u0001
+password12yw3, user2, u0002
+
+--basic-auth-file=user-details.csv
+
+ii. Static Token Files:
+This is a csv file that contains user details and token, which is now passed to the kube-apiserver as an option
+
+whvvbdhdgejdhHR472RY4PO3, user1, u0001
+GDWDFUf63egtsetw4e2yejou, user2, u0002
+
+--basic-auth-file=user-details.csv
+
+curl -v -k https://localhost:6443/api/v1/pods -u "user1:password123"

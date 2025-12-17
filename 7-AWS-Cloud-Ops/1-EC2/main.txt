@@ -1,0 +1,20 @@
+1. Changing Instance Type
+Sometimes you want to do vertical scaling on your VM that is running on AWS, you can do this for a EBS backed instance.
+You can change from a t2 to a t3 by stopping it first, then change instance type. This also preseves all the data in
+the block storage (EBS Volume)
+
+
+2. Placement Groups
+This is how your instances are placed in AWS data center
+
+i. Cluster
+All the instances are close together within one AZ, this offers low latency. However, this is a single point of failure
+if the zone goes down your application goes down.
+
+ii. Spread
+The instances are spread across AZs, typically 7 per AZ. They might not offer low latency like cluster but the avoids single
+point of failure.  Limited to 7 instances per AZ
+
+iii. Partition
+Divides instances into logical partitions, each on separate hardware racks. Instances in one partition don't share
+underlying hardware with instances in other partitions. Can have up to 7 partitions per AZ and hundreds of instances total.

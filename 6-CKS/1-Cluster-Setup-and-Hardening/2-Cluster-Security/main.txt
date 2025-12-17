@@ -1,0 +1,6 @@
+The kube-apiserver is at the heart of the cluster so securing this is important to the entire security of the cluster,
+when securing a cluster we consider 2 things:
+1. Who can access the cluster which is called Authentication
+2. What those who access the cluster can do, this is known as Authorization
+
+

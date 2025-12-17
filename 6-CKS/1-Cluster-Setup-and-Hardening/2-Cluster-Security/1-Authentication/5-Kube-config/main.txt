@@ -1,0 +1,29 @@
+curl https://cluster-ip:6443/api/v1/pods \
+--key myuser.key
+--cert myuser.crt
+--cacert ca.crt
+
+kubectl get pods
+--server cluster-ip:6443
+--client-key myuser.key
+--client-certificate myuser.crt
+--certificate-authority ca.crt
+
+Instead of typying this all the time you can put it in a kube-config fike
+
+~/.kube/config  # this is the part where the kubeconfig file should be in
+
+kubectl get pods --kubeconfig /path/to/file
+
+
+The kubeconfig file has 3 components
+1. Clusters:
+    This is the different kubernetes clusters you need access to, it could be prod, dev or staging cluster
+
+2. Users:
+    This is the users that needs to access the cluster, i.e myuser
+
+3. Context:
+    This maps the users to the cluster
+
+ 

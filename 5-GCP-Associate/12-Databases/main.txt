@@ -74,7 +74,7 @@ BigQuery
 This is a relational database, that allows you query large datasets.
 - You can export to cloud storage with csv/json or compressed.
 - You can configure data to expire data
-- You can query external sources and query them
+- Can Query external source
 
 
 

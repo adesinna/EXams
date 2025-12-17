@@ -1,0 +1,6 @@
+CIS stands for Center for Internet Security. They provide security benchmark for OS, Cloud, Mobile OS, Network, Desktop,
+and servers.
+
+CIS Benchmark for Kubernetes
+This gives us security standard for your kubernetes cluster. We can use the kube-bench tool to access the CIS standard
+on your cluster security.

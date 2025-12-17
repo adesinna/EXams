@@ -1,0 +1,39 @@
+In kubernetes we have servers and  components
+
+
+Servers:
+1. Kube-api server
+    The users and other components like scheduler, kube-controller, tries to talk to the api-server
+
+2. ETCD
+    It stores the data, so kube-api updates the database of the etcd
+
+3. Kubelet
+    The kubelet allows the kube-api server to query the kubelet, to create pods and health of the pods running on
+    each node
+
+Clients:
+1. Users
+    They access the kube-api using the kubectl to make changes to the cluster
+
+2. Kube-scheduler
+    They access the kube-api server to allow it to schedule pods on nodes
+
+3. Kube-controller-manager
+    They talk to the kube-api to make sure a number of pods is running
+
+4. Kube-api
+    It talks to kubelet and etcd
+5. Kube-proxy
+    It talks to the kube-api
+
+
+
+
+Check the path to the certificate in the static pods
+
+/etc/kubernetes/manifests/
+
+docker logs container id # to see the logs of the pods
+
+kubeadm certs check-expiration
