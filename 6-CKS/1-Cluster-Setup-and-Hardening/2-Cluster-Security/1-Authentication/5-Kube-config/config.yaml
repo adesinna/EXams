@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Config
+
+clusters:
+- name: cluster-dev
+  cluster:
+    server: https://dev.example.com
+    certificate-authority-data: DEV_CA_BASE64==
+
+- name: cluster-staging
+  cluster:
+    server: https://staging.example.com
+    certificate-authority-data: STAGING_CA_BASE64==
+
+- name: cluster-prod
+  cluster:
+    server: https://prod.example.com
+    certificate-authority-data: PROD_CA_BASE64==
+
+users:
+- name: dev-admin
+  user:
+    token: DEV_ADMIN_TOKEN
+
+- name: dev-readonly
+  user:
+    token: DEV_READ_TOKEN
+
+- name: ops-engineer
+  user:
+    client-certificate-data: OPS_CERT_BASE64==
+    client-key-data: OPS_KEY_BASE64==
+
+- name: cicd-bot
+  user:
+    token: CICD_TOKEN
+
+contexts:
+- name: dev-admin-context
+  context:
+    cluster: cluster-dev
+    user: dev-admin
+    namespace: default
+
+- name: dev-readonly-context
+  context:
+    cluster: cluster-dev
+    user: dev-readonly
+    namespace: default
+
+- name: staging-ops-context
+  context:
+    cluster: cluster-staging
+    user: ops-engineer
+    namespace: platform
+
+- name: prod-ops-context
+  context:
+    cluster: cluster-prod
+    user: ops-engineer
+    namespace: prod
+
+- name: prod-cicd-context
+  context:
+    cluster: cluster-prod
+    user: cicd-bot
+    namespace: prod
+
+current-context: dev-admin-context

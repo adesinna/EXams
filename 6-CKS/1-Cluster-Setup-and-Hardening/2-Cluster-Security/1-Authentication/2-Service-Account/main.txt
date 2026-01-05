@@ -17,4 +17,4 @@ They are two types of accounts
 
  When you mount it as a pod, it means the pod is inside the kubernetes cluster, so it means that the pod would
  use it.
- Whenever a pod is created, the pod uses the default sa of the namespace, to access the
+ Whenever a pod is created, the pod uses the default sa of the namespace, to access the kube-api server.

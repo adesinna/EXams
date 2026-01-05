@@ -26,4 +26,5 @@ The kubeconfig file has 3 components
 3. Context:
     This maps the users to the cluster
 
- 
+
+kubectl config -h   # this will help get you all the necessary info you need

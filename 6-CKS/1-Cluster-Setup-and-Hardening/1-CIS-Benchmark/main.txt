@@ -4,3 +4,5 @@ and servers.
 CIS Benchmark for Kubernetes
 This gives us security standard for your kubernetes cluster. We can use the kube-bench tool to access the CIS standard
 on your cluster security.
+
+Kube-bench is the open source tools by aquasec, that validates and suggests your cluster security.
