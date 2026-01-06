@@ -1,0 +1,43 @@
+In Kubernetes (k8s), API groups and versions help organize and evolve the cluster's RESTful API
+in a structured and backward-compatible way. Here's a breakdown:
+
+
+1. What are API Groups?
+
+An API Group is a logical grouping of related Kubernetes resources. It helps separate core Kubernetes functionality
+from extensions and experimental features.
+
+Common API Groups:
+
+| API Group                   | Description                                                           |
+| --------------------------- | --------------------------------------------------------------------- |
+| `""` (core group)           | Core resources like `Pod`, `Service`, `Node`, etc.                    |
+| `apps`                      | Workloads like `Deployment`, `StatefulSet`, `DaemonSet`               |
+| `batch`                     | Batch jobs like `Job`, `CronJob`                                      |
+| `autoscaling`               | Resources for scaling like `HorizontalPodAutoscaler`                  |
+| `rbac.authorization.k8s.io` | Role-Based Access Control (RBAC) resources like `Role`, `ClusterRole` |
+| `apiextensions.k8s.io`      | For defining CRDs (Custom Resource Definitions)                       |
+| `networking.k8s.io`         | Networking resources like `Ingress`, `NetworkPolicy`                  |
+
+
+
+🔹 2. What are API Versions?
+
+Each API group can have multiple versions, which indicate the maturity and stability of the resource definitions.
+
+Common API Versions:
+
+| Version    | Meaning                                                             |
+| ---------- | ------------------------------------------------------------------- |
+| `v1`       | Stable; fully supported and safe for production use                 |
+| `v1beta1`  | Beta; fairly stable but might still change (deprecated over time)   |
+| `v1alpha1` | Alpha; experimental and subject to change or removal without notice |
+
+Versions apply per group, so you'll see combinations like:
+
+ `apps/v1` for `Deployment`
+`batch/v1` for `Job`
+`networking.k8s.io/v1` for `Ingress`
+
+Use kubectl api-resources and kubectl api-versions to explore what's available.
+

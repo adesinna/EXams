@@ -1,0 +1,20 @@
+After a user authenticate into a cluster, there should be what they can do in a cluster, there would be different people
+accessing the cluster and least privilege principle might be applied.
+
+
+Authorization Modes:
+
+Kubernetes supports multiple authorization modes, which can be enabled via the API server flag
+--authorization-mode. You can enable more than one mode, and Kubernetes will check them in order.
+
+| Mode                   | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `Node`                 | Grants permissions to kubelets for accessing API resources they manage |
+| `AlwaysAllow`          | Allows all requests (not secure, mostly used for testing)              |
+| `AlwaysDeny`           | Denies all requests (also only for testing)                            |
+| `ABAC` (deprecated)    | Attribute-Based Access Control (uses policies defined in a JSON file)  |
+| `RBAC` (most common)   | Role-Based Access Control (recommended and widely used)                |
+| `Webhook`              | External service handles authorization decisions                       |
+
+
+RBAC would be considered going forward
